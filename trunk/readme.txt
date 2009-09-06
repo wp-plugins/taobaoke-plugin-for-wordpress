@@ -1,42 +1,42 @@
 === Taobaoke Plugin For Wordpress ===
 Contributors: Wyatt Fang, Blake Han
 Donate link: http://blog.gotall.net
-Tags: taobaoke, �Ա���, ���, �ƹ�, ��������, �Ա�, Tao Bao Ke, Tao bao ke
+Tags: taobaoke, 淘宝客, 广告, 推广, 阿里妈妈, 淘宝, Tao Bao Ke, Tao bao ke
 Requires at least: 2.8.2
 Tested up to: 1.0
-�Ա��͵�wordpress�Ĳ��������ͨ��wordpress�ĺ�̨�����Ա��͵���Ʒ������blog��׬Ǯ��Ŀǰ�汾�п�����wordpress��̨���������Ա��͵���Ʒ�ͷ����б���Ȼ��ѡ�����ŵ���Ʒ�ƹ㵽վ���sidebar���߲���ҳ���С����๦�ܻ���½�������С�
+淘宝客的wordpress的插件，可以通过wordpress的后台添加淘宝客的商品到您的blog来赚钱，目前版本中可以在wordpress后台方便的浏览淘宝客的商品和分类列表，然后选择热门的商品推广到站点的sidebar或者博客页面中。更多功能还在陆续加入中。
 
 
 == Description ==
 
-�Ա��͵�wordpress�Ĳ��������ͨ��wordpress�ĺ�̨�����Ա��͵���Ʒ������blog��׬Ǯ��Ŀǰ�汾�п�����wordpress��̨���������Ա��͵���Ʒ�ͷ����б���Ȼ��ѡ�����ŵ���Ʒ�ƹ㵽վ���sidebar���߲���ҳ���С����๦�ܻ���½�������С�
+淘宝客的wordpress的插件，可以通过wordpress的后台添加淘宝客的商品到您的blog来赚钱，目前版本中可以在wordpress后台方便的浏览淘宝客的商品和分类列表，然后选择热门的商品推广到站点的sidebar或者博客页面中。更多功能还在陆续加入中。
 
-Ŀǰ֧�ֵĹ����У�
-1. �����ں�̨�Զ�������Ա��͵�pid��ͨ����pid������Է����ͨ����Ĳ�����׬Ǯ��
-2. �Զ����Ա�����ƽ̨��Ӧ�õ���֤�룻
-3. ������wordpress��̨���������Ա�����Ʒ�ķ��࣬���ɷ���鿴�÷����µ���Ʒ��
-4. ����ѡ���Լ�ϲ������Ʒ�����ƹ��б�����д���ĵ�ʱ�򣬿���ͨ����plugin�������ı��༭���ϵ�iconѡ����Ʒ���뵽������(֧�ֲ���ͼƬ��棬ͼƬ+���ֹ��)��
-4. ͨ���ò����д��widget���ߣ������ڡ�С���ߡ�ҳ�����Ӳ�����Ա��͹�棬����һ�ϣ���ѡ����Ա�����Ʒ�ƹ������ڲ�����ˣ����ң���Ϊ����ģ�����Զ��ƻ�����Ա��Ͳ������Ʒ�ƹ���ʽ�����㲻�õ����������Ա�����ҳ��Ҳ��ӵ����ͬ�ı���ƹ����ܡ�
+目前支持的功能有：
+1. 可以在后台自定义你的淘宝客的pid，通过该pid，你可以方便的通过你的博客来赚钱；
+2. 自定义淘宝开放平台的应用的验证码；
+3. 可以在wordpress后台方便的浏览淘宝客商品的分类，并可方便查看该分类下的商品；
+4. 可以选择自己喜欢的商品放入推广列表，编写博文的时候，可以通过该plugin定制在文本编辑框上的icon选择商品插入到文章中(支持插入图片广告，图片+文字广告)；
+4. 通过该插件编写的widget工具，可以在“小工具”页面添加侧边栏淘宝客广告，轻轻一拖，你选择的淘宝客商品推广便出现在侧边栏了，而且，更为方便的，你可以定制化你的淘宝客侧边栏商品推广样式，让你不用到阿里妈妈淘宝客主页，也能拥有相同的便捷推广享受。
 
 == Installation ==
 
-1. �ϴ� `taobaoke` �ļ��е����wordpress���Ŀ¼�£� `/wp-content/plugins/` 
-2. �ڲ������ҳ�漤��ò����
-3. �����Ա��͡����ý��棬��������Ա���pid�����������Ա���Ӷ������ݣ�
-4. ���Ա�����ƽ̨(http://open.taobao.com)����һ��Ӧ��[���磺wordpress�Ա���Ӧ��]����ȡApp Key��App Secret����������⣬���Ը������ԣ��Ұ�æ���롣Ŀǰ��Ҳ����ʹ�øò���ṩ��App Key��App Secret��
+1. 上传 `taobaoke` 文件夹到你的wordpress插件目录下： `/wp-content/plugins/`
+2. 在插件管理页面激活该插件；
+3. 到“淘宝客”设置界面，设置你的淘宝客pid，这是你获得淘宝客佣金的依据；
+4. 到淘宝开放平台(http://open.taobao.com)创建一个应用[例如：wordpress淘宝客应用]，获取App Key和App Secret。如果有问题，可以给我留言，我帮忙申请。目前你也可以使用该插件提供的App Key和App Secret。
 
 
 == Screenshots ==
 
-1. �� �Ա��� ���ý��棬��������Ա���PID��Ϣ��
-2. ������Ҫ�ƹ��Ա�����Ʒ��ʱ�򣬿�����ѡ�ڷ��࣬Ȼ��ѡ��÷����µ���Ʒ����Ʒ���Է����ƹ��б�(д����ʱ���Լ�ʱ���������У���screenshot-4)��
-3. �����ƷʱҲ���Խ���Ʒ���ƹ㣬�ƹ����Ʒ������ڲ����(����ͨ����С���ߡ�widget���Ա��͵�widget�ϵ������)���������Ա��Ͳ�����ƹ����ʽ��Ҳ���Ա���Ĭ�ϣ�Ĭ��ֵ�Ͱ��������Ա����ƹ��Ĭ��ֵһ�£�
-4. д����ʱ�����Ե�� ��� ���Ա���ͼ�꣬����������ƹ��б�����Ʒ�������У�
+1. 在 淘宝客 设置界面，配置你的淘宝客PID信息；
+2. 当你需要推广淘宝客商品的时候，可以先选在分类，然后选择该分类下的商品，商品可以放入推广列表(写文章时可以及时插入文章中，见screenshot-4)；
+3. 浏览商品时也可以将商品做推广，推广的商品会出现在侧边栏(可以通过“小工具”widget把淘宝客的widget拖到侧边栏)，并配置淘宝客侧边栏推广的样式，也可以保持默认，默认值和阿里妈妈淘宝客推广的默认值一致；
+4. 写文章时，可以点击 酷酷 的淘宝客图标，插入你加入推广列表的商品到文章中；
 
 == Changelog ==
 
 = 1.0 =
-* ��һ�������汾��������õĹ��ܻ��ڿ����С�
+* 第一个发布版本，更多好用的功能还在开发中。
 
 
 Markdown uses email style notation for blockquotes and I've been told:
