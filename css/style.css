@@ -1,0 +1,83 @@
+.zebra_color_2 {
+    background-color:#F1F1F1;
+}
+
+.zebra_color_1 {
+    background-color:#FFFFFF;
+}
+
+/*----- pagination style -----*/
+.paging a {
+    border: solid 1px #e6e6e6;
+    padding: 0 4px;
+    display: inline-block;
+    text-decoration: none;
+    vertical-align: middle;
+    color: #468e00;
+}
+
+.paging a:hover {
+    color:#468e00;
+    background: #e6e6e6;
+    text-decoration: none;
+}
+
+.paging a.current-page {
+    padding: 0 5px;
+    background: #f3ffc8;
+    border: solid 1px #e6e6e6;
+    color: #468e00;
+}
+
+.paging a.current-page:hover {
+    padding: 0 5px;
+    background: #f3ffc8;
+    border: solid 1px #e6e6e6;
+    color: #000;
+}
+
+.paging a.prev-page {
+    background: url('../images/icon/arrowLeftBlue.gif') no-repeat scroll 2px center;
+    padding: 0 5px 0 8px;
+}
+
+.paging a.next-page {
+    background: url('../images/icon/arrowRightBlue.gif') no-repeat scroll 43px center;
+    padding: 0 8px 0 5px;
+}
+
+.paging a.prev-page:hover {
+    background: #e6e6e6 url('../images/icon/arrowLeftBlue.gif') no-repeat scroll 2px center;
+    padding: 0 5px 0 8px;
+}
+
+.paging a.next-page:hover {
+    background: #e6e6e6 url('../images/icon/arrowRightBlue.gif') no-repeat scroll 43px center;
+    padding: 0 8px 0 5px;
+}
+
+.paging a.first-page {
+    background: url('../images/icon/arrowLeftBlue.gif') no-repeat scroll 2px center;
+    padding: 0 5px 0 8px;
+}
+
+.paging a.last-page {
+    background: url('../images/icon/arrowRightBlue.gif') no-repeat scroll 57px center;
+    padding: 0 5px 0 8px;
+}
+
+.paging a.first-page:hover {
+    background: #e6e6e6 url('../images/icon/arrowLeftBlue.gif') no-repeat scroll 2px center;
+    padding: 0 5px 0 8px;
+}
+
+a.last-page:hover {
+    background: #f3ffc8 url('../images/icon/arrowRightBlue.gif') no-repeat scroll 57px center;
+    padding: 0 5px 0 8px;
+}
+
+.paging {
+    text-align: center;
+    margin: 0px 8px;
+    padding: 3px 0px;
+}
