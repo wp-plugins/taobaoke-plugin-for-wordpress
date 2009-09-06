@@ -1,0 +1,129 @@
+<?php
+class CatController {
+    public function getColumns() {
+        return array(
+               'cid' => array(
+                    'header' => 'cid',
+                    'function' => 'showCatsDetail',
+                    'sortable' => false,
+                    ),
+            );
+    }
+
+    public function getDatasource() {
+        $cid = empty($_GET['cid']) ? 0 : $_GET['cid'];
+        return new TaobaokeCatsDataSource(array('parent_cid' => $cid));
+    }
+
+    public function showCatsDetail($cid, $row) {
+        $params = array('cid' => $row['cid'], 'name' => $row['name'], 'is_parent' => $row['is_parent']);
+
+        return '<a href="' . buildUrl($params) . '">' . $row['name'] . '</a>';
+    }
+}
+
+class ItemController {
+    public function getColumns() {
+        return array(
+            'title' => array(
+                'header' => '商品推广信息',
+                'sortable' => false,
+                'function' => 'showItemDetail'
+            ),
+            'price' => array(
+                'header' => '单价',
+                'sortable' => true,
+            ),
+            'commission_rate' => array(
+                'header' => '佣金比率',
+                'sortable' => true,
+            ),
+            'commission' => array(
+                'header' => '佣金',
+                'sortable' => true,
+            ),
+            'commission_volume' => array(
+                'header' => '佣金总支出'
+            ),
+            'commission_num' => array(
+                'header' => '累计推广量',
+                'sortable' => true,
+            ),
+            'action' => array(
+                'header' => '操作',
+                'sortable' => false,
+                'function' => 'showActions'
+            )
+        );
+    }
+
+    public function getDatasource() {
+        $pid = var_get('pid');
+        $cid = empty($_GET['cid']) ? 0 : $_GET['cid'];
+
+        return new TaobaokeItemsDataSource($pid, array('cid' => $cid), array('commission_num' => 'desc'));
+    }
+
+    public function showActions($id, $row) {
+        $cid = empty($_GET['cid']) ? 0 : $_GET['cid'];
+        $name = empty($_GET['name']) ? 'no-name' : $_GET['name'];
+
+        $promote_url = array('page' => 'taobaoke-actions.php', 'action' => 'promote', 'item_id' => $row['id'], 'item_title' => $row['title'], 'item_pic' => $row['pict_url'], 'item_url' => urlencode($row['click_url']), 'price'=>$row['price'], 'cid' => $cid, 'name' => $name, 'TB_iframe' => 'true', 'width' => 780, 'height' => 450);
+        $cart_url = array('page' => 'taobaoke-actions.php', 'action' => 'cart', 'item_id' => $row['id'], 'item_title' => $row['title'], 'item_pic' => $row['pict_url'], 'item_url' => urlencode($row['click_url']), 'price'=>$row['price'], 'cid' => $cid, 'name' => $name, 'TB_iframe' => 'true', 'width' => 780, 'height' => 450);
+
+        return "<a class='thickbox' title='加入推广列表' href='" . buildRawUrl($cart_url) . "' style='color:blue;text-decoration:none'>放入推广列表</a><br />" .
+               "<a class='thickbox' title='推广商品' href='" . buildRawUrl($promote_url) . "' style='color:blue;text-decoration:none'>推广此商品</a>";
+    }
+
+    public function showItemDetail($title, $row) {
+        $item_img = $row['pict_url'];
+        $item_url = $row['click_url'];
+
+        return <<<ITEM_DETAIL
+    <table>
+      <tr>
+        <td><a class="thickbox" rel="淘宝图片" title="{$title}" href="$item_img"><img src="$item_img" style="width:72px;height:80px"/></a></td>
+        <td>
+            <a title="{$title}" class="thickbox" href="{$item_url}&TB_iframe=true&width=640&height=524" >$title</a><br />
+            <span >掌柜：{$row['nick']}</span>
+        </td>
+      </tr>
+    </table>
+ITEM_DETAIL;
+    }
+}
+
+function display_page() {
+    $vars = array();
+
+    $has_cats = empty($_GET['is_parent']) ? (empty($_GET['cid']) ? true : false) : true;
+    $vars['has_cats'] = $has_cats;
+
+    if (!empty($_GET['name'])) {
+        $vars['taobaoke_cur_cat'] = $_GET['name'];
+    }
+
+    if ($has_cats) {
+        $controller = new CatController();
+
+        $taobaoke_cats_table = new Table($controller, $controller->getColumns(), $controller->getDatasource());
+        $taobaoke_cats_table->setGridTableColumn(3);
+        $taobaoke_cats_table->setNoRecordLabel('当前分类没有二级分类，请查看该类目下的商品');
+
+        $vars['taobaoke_cats_table'] = $taobaoke_cats_table;
+    }
+
+    $has_items = empty($_GET['cid']) ? false : true;
+    $vars['has_items'] = $has_items;
+
+    if ($has_items) {
+        $item_controller = new ItemController();
+        $item_table = new Table($item_controller, $item_controller->getColumns(), $item_controller->getDatasource());
+        $item_table->setNoRecordLabel('该类目下没有商品信息');
+
+        $vars['taobaoke_item_table'] = $item_table;
+    }
+
+    return $vars;
+}
+?>
