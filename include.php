@@ -1,8 +1,8 @@
 <?php
 define('TAO_PATH', dirname(__FILE__) . '/');
 
-define('APP_KEY', '12004702');
-define('APP_SECRET', 'b4034d558a5c808047848a31bb98940c');
+define('APP_KEY', '12001725');
+define('APP_SECRET', 'd37bfd74179a2505d1e8c47e8c87a638');
 define('TOP_URL', 'http://gw.api.taobao.com/router/rest');
 //define('TOP_URL', 'http://gw.sandbox.taobao.com/router/rest');
 define('TOP_PID', 'mm_13770637_0_0');
