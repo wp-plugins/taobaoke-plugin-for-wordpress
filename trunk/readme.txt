@@ -11,6 +11,10 @@ Tested up to: 1.2
 
 淘宝客的wordpress的插件，可以通过wordpress的后台添加淘宝客的商品到您的blog来赚钱，目前版本中可以在wordpress后台方便的浏览淘宝客的商品和分类列表，然后选择热门的商品推广到站点的sidebar或者博客页面中。更多功能还在陆续加入中。
 
+安装详见安装步骤，这里有一点需要注意，目前我申请的淘宝客的应用的APP KEY正在审核中,大家可以临时使用下面的APP KEY来获取数据, 7天后在更新至最新的APP KEY. 我接下来会写一篇申请淘宝开放平台APP KEY的介绍文章，大家可以申请自己的APP KEY。
+App Key：12001725
+App Secret：d37bfd74179a2505d1e8c47e8c87a638
+
 目前支持的功能有：
 1. 可以在后台自定义你的淘宝客的pid，通过该pid，你可以方便的通过你的博客来赚钱；
 2. 自定义淘宝开放平台的应用的验证码；
@@ -23,6 +27,9 @@ Tested up to: 1.2
 1. 上传 `taobaoke` 文件夹到你的wordpress插件目录下： `/wp-content/plugins/`
 2. 在插件管理页面激活该插件；
 3. 到“淘宝客”设置界面，设置你的淘宝客pid，这是你获得淘宝客佣金的依据；
+   这里有一点需要注意，目前我申请的淘宝客的应用的APP KEY正在审核中,大家可以临时使用下面的APP KEY来获取数据, 7天后在更新至最新的APP KEY. 我接下来会写一篇申请淘宝开放平台APP KEY的介绍文章，大家可以申请自己的APP KEY。
+App Key：12001725
+App Secret：d37bfd74179a2505d1e8c47e8c87a638
 4. 到淘宝开放平台(http://open.taobao.com)创建一个应用[例如：wordpress淘宝客应用]，获取App Key和App Secret。如果有问题，可以给我留言，我帮忙申请。目前你也可以使用该插件提供的App Key和App Secret。
 
 
