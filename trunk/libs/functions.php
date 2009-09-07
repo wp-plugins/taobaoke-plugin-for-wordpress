@@ -23,12 +23,12 @@ function var_delete($var_key) {
 }
 
 function taobaoke_img_path() {
-    $img_url = WP_PLUGIN_URL . '/taobaoke-plugin-for-wordpress/images/';
+    $img_url = WP_PLUGIN_URL . '/' . TAOBAOKE_PLUGIN_FOLDER . '/images/';
     return $img_url;
 }
 
 function taobaoke_css_path() {
-    $css_url = WP_PLUGIN_URL . '/taobaoke-plugin-for-wordpress/css/';
+    $css_url = WP_PLUGIN_URL . '/' . TAOBAOKE_PLUGIN_FOLDER . '/css/';
     return $css_url;
 }
 
@@ -37,7 +37,7 @@ function taobaoke_tpl_path() {
 }
 
 function taobaoke_js_path() {
-    $js_url = WP_PLUGIN_URL . '/taobaoke-plugin-for-wordpress/js/';
+    $js_url = WP_PLUGIN_URL . '/' . TAOBAOKE_PLUGIN_FOLDER . '/js/';
     return $js_url;
 }
 
