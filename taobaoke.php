@@ -3,7 +3,7 @@
 Plugin Name: Taobaoke Plugin For Wordpress
 Plugin URI: http://blog.gotall.net/
 Description: 淘宝客的wordpress的插件，可以通过wordpress的后台添加淘宝客的商品到您的blog来赚钱。Bug请提交到http://blog.gotall.net
-Version: 0.1
+Version: 1.2
 Author: Wyatt Fang
 Author URI: http://blog.gotall.net/
 */
