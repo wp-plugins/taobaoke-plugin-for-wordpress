@@ -30,26 +30,55 @@ function taobaoke_show_display_style($style) {
     }
 }
 
-function taobaoke_widget_register() {
-    function taobaoke_widget_sidebar_promote($args) {
-        global $wpdb;
+function taobaoke_widget_sidebar()  {
+    $widget_title = var_get('widget_title');
+    if (empty($widget_title)) {
+        $widget_title = '淘宝客 - 侧边栏推荐';
+    }
 
-        extract($args);
+    $before_widget = ''; //自己根据自己主题的格式更改样式
+    $before_title = '<h1>';//自己根据自己主题的格式更改样式
+    $after_title = '</h1>';//自己根据自己主题的格式更改样式
+    $after_widget = '';//自己根据自己主题的格式更改样式
 
-        $widget_title = var_get('widget_title');
-        if (empty($widget_title)) {
-            $widget_title = '淘宝客 - 侧边栏推荐';
+    $vars['before_widget'] = $before_widget;
+    $vars['before_title'] = $before_title;
+    $vars['after_title'] = $after_title;
+    $vars['after_widget'] = $after_widget;
+
+    taobaoke_widget_sidebar_promote($vars);
+}
+
+function taobaoke_widget_sidebar_promote($args) {
+    global $wpdb;
+
+    extract($args);
+
+    $widget_title = var_get('widget_title');
+    if (empty($widget_title)) {
+        $widget_title = '淘宝客 - 侧边栏推荐';
+    }
+
+    echo $before_widget;
+    echo $before_title . $widget_title . $after_title;
+
+    $table_name = $wpdb->prefix . TAOBAOKE_PROMOTE_TABLE;
+
+    $content = '';
+
+    $promote_item_total = $wpdb->get_var("SELECT COUNT(*) AS count FROM $table_name WHERE `promote_type` = 'sidebar';");
+
+    if ($promote_item_total > 0) {
+        $promote_count = 5;
+
+        $min = 0;
+        if ($promote_item_total > 5) {//TODO: Hard code 5 here, will put it in the configuration file later
+            $range = $promote_item_total - 5;
+            $min = rand(0, $range);
         }
 
-        echo $before_widget;
-        echo $before_title . $widget_title . $after_title;
+        $result = $wpdb->get_results("SELECT `item_id`, `item_html` FROM $table_name WHERE `promote_type` = 'sidebar' LIMIT $min, 5;");
 
-        $table_name = $wpdb->prefix . TAOBAOKE_PROMOTE_TABLE;
-        $user = wp_get_current_user();
-        $user_id = $user->id;
-
-        $result = $wpdb->get_results("SELECT `item_id`, `item_html` FROM $table_name WHERE `promote_type` = 'sidebar';");
-        $content = '';
         if ($result) {
             $items_id = '';
             //$site_url = get_bloginfo('wpurl');
@@ -59,14 +88,16 @@ function taobaoke_widget_register() {
                 $items_id .= $cur->item_id . ',';
             }
         }
-        else {
-            $content = '暂无推广信息';
-        }
-
-        echo $content;
-        echo $after_widget;
+    }
+    else {
+        $content = '暂无推广信息';
     }
 
+    echo $content;
+    echo $after_widget;
+}
+
+function taobaoke_widget_register() {
     register_sidebar_widget('Taobaoke-Widget', 'taobaoke_widget_sidebar_promote');
 }
 

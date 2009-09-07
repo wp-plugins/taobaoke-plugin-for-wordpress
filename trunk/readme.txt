@@ -3,7 +3,7 @@ Contributors: Wyatt Fang, Blake Han
 Donate link:  http://blog.gotall.net/index.php/淘宝客/
 Tags: taobaoke, 淘宝客, 广告, 推广, 阿里妈妈, 淘宝, Tao Bao Ke, Tao bao ke
 Requires at least: 2.8.2
-Tested up to: 1.3
+Tested up to: 1.4
 淘宝客的wordpress的插件，可以通过wordpress的后台添加淘宝客的商品到您的blog来赚钱，目前版本中可以在wordpress后台方便的浏览淘宝客的商品和分类列表，然后选择热门的商品推广到站点的sidebar或者博客页面中。更多功能还在陆续加入中。
 
 
@@ -32,6 +32,29 @@ App Key：12001725
 App Secret：d37bfd74179a2505d1e8c47e8c87a638
 4. 到淘宝开放平台(http://open.taobao.com)创建一个应用[例如：wordpress淘宝客应用]，获取App Key和App Secret。如果有问题，可以给我留言，我帮忙申请。目前你也可以使用该插件提供的App Key和App Secret。
 
+注意：如果你的主题不支持widget，你需要找到你的主题的sidebar.php，把下面的代码增加到你的侧边栏：
+<?php taobaoke_widget_sidebar(); ?>
+
+如果你希望改变默认的设置，可以更改以下的函数：
+function taobaoke_widget_sidebar()  {
+    $widget_title = var_get('widget_title');
+    if (empty($widget_title)) {
+        $widget_title = '淘宝客 - 侧边栏推荐';
+    }
+
+    $before_widget = ''; //自己根据自己主题的格式更改样式，这里是侧边栏块元素的风格
+    $before_title = '<h1>';//自己根据自己主题的格式更改样式，这里是 侧边栏 标题风格
+    $after_title = '</h1>';//自己根据自己主题的格式更改样式
+    $after_widget = '';//自己根据自己主题的格式更改样式
+
+    $vars['before_widget'] = $before_widget;
+    $vars['before_title'] = $before_title;
+    $vars['after_title'] = $after_title;
+    $vars['after_widget'] = $after_widget;
+
+    taobaoke_widget_sidebar_promote($vars);
+}
+
 
 == Screenshots ==
 
@@ -44,9 +67,9 @@ App Secret：d37bfd74179a2505d1e8c47e8c87a638
 
 = 1.0 =
 * 第一个发布版本，更多好用的功能还在开发中。
+= 1.2 =
+* 做了对plugin folder 名字hard code的hot fix
+= 1.4 =
+* 增加了新的功能，可以删除自己收藏的淘宝客商品，可以删除推广的商品列表；增加了对侧边栏广告的随机播放；
 
 
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-`<?php code(); // goes in backticks ?>`
