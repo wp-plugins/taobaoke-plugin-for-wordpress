@@ -1,5 +1,5 @@
 <?php
-include_once (ABSPATH . PLUGINDIR . '/taobaoke/include.php');
+include_once (dirname(__FILE__) . '/../include.php');
 
 function taobaoke_get_setting($setting_name) {
 
