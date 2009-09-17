@@ -342,7 +342,7 @@ function taobaoke_gotall_analytics_vars() {
 function taobaoke_gotall_analytics() {
     echo "<!-- Gotall Analytics Tracking by Gotall Analyticator -->\n";
 
-    $js_url = taobaoke_js_path() . 'external.jquery.js?version=1.6';
+    $js_url = taobaoke_js_path() . 'external.jquery.js?version=1.7';
 
     echo "<script type=\"text/javascript\" src=\"{$js_url}\"></script>\n\n";
     echo "<!-- Gotall Analytics Tracking by Gotall Analyticator End-->\n";
