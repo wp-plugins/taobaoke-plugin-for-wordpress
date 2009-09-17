@@ -43,7 +43,7 @@ class TaobaokeItemsDataSource extends DataSource {
         if (array_key_exists('cid', $search)) {
             $this->request->setCid($search['cid']);
         }
-        else if (array_key_exists('keyword', $search)) {
+        if (array_key_exists('keyword', $search)) {
             $this->request->setKeyword($search['keyword']);
         }
 
