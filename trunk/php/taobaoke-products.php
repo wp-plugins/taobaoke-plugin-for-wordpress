@@ -61,7 +61,15 @@ class ItemController {
         $pid = var_get('pid');
         $cid = empty($_GET['cid']) ? 0 : $_GET['cid'];
 
-        return new TaobaokeItemsDataSource($pid, array('cid' => $cid), array('commission_num' => 'desc'));
+        $search = array('cid' => $cid);
+
+        $search_keyword = empty($_GET['taobaoke_item_search']) ? NULL : $_GET['taobaoke_item_search'];
+
+        if (null != $_GET['taobaoke_item_search'])  {
+            $search['keyword'] = $search_keyword;
+        }
+
+        return new TaobaokeItemsDataSource($pid, $search, array('commission_num' => 'desc'));
     }
 
     public function showActions($id, $row) {
@@ -103,6 +111,10 @@ function display_page() {
         $vars['taobaoke_cur_cat'] = $_GET['name'];
     }
 
+    $vars['query_string'] = explode_query_string();
+    unset($vars['query_string']['taobaoke_item_search']);
+    unset($vars['query_string']['taobaoke_item_search_button']);
+
     if ($has_cats) {
         $controller = new CatController();
 
@@ -113,7 +125,7 @@ function display_page() {
         $vars['taobaoke_cats_table'] = $taobaoke_cats_table;
     }
 
-    $has_items = empty($_GET['cid']) ? false : true;
+    $has_items = empty($_GET['cid']) && empty($_GET['taobaoke_item_search'])? false : true;
     $vars['has_items'] = $has_items;
 
     if ($has_items) {
