@@ -36,6 +36,4 @@ jQuery(document).ready(function() {
 
         item_id_list = item_id_list + ',' + item_id;
 	});
-
-	gotall_tracking_ads('type=ad_views' + '&item_id=' + encodeURI(item_id_list));
 });
