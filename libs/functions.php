@@ -142,6 +142,25 @@ function buildRawUrl($query_string) {
     return substr($url, 0, -1);
 }
 
+function explode_query_string() {
+    $parameters = NULL;
+    $query_string = Common::getQueryString();
+
+    if ('' != $query_string) {
+        $parameters = explode('&', $query_string);
+    }
+
+    $new_parameters = array();
+    for ($i = 0; $i < count($parameters); $i++) {
+        $parameter = explode('=', $parameters[$i]);
+        $key = $parameter[0];
+        $value = isset($parameter[1]) ? $parameter[1] : '';
+        $new_parameters[$key] = $value;
+    }
+
+    return $new_parameters;
+}
+
 function addQueryString($parameter_array) {
         $parameters = NULL;
         $query_string = Common::getQueryString();
