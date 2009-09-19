@@ -38,6 +38,8 @@ class Condition {
      */
     public function setSortMode($sort_mode) {
         $this->sort_mode = $sort_mode;
+
+        return $this->sort_mode;
     }
 
     /**

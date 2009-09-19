@@ -88,7 +88,7 @@ class TaobaokeItemsDataSource extends DataSource {
             $this->_data_count = count($this->_total_data);
 
             if ($this->_data_count > 0) {
-                $this->_total = 99 * $this->page_per_count;
+                $this->_total = 100 * $this->page_per_count;
             }
         }
         catch (ApiException $ex) {
