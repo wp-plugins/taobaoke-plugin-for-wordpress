@@ -52,6 +52,7 @@ class ItemController {
             'action' => array(
                 'header' => '操作',
                 'sortable' => false,
+                'cell_style' => 'text-align:left',
                 'function' => 'showActions'
             )
         );
@@ -78,22 +79,25 @@ class ItemController {
 
         $promote_url = array('page' => 'taobaoke-actions.php', 'action' => 'promote', 'item_id' => $row['id'], 'item_title' => $row['title'], 'item_pic' => $row['pict_url'], 'item_url' => urlencode($row['click_url']), 'price'=>$row['price'], 'cid' => $cid, 'name' => $name, 'TB_iframe' => 'true', 'width' => 780, 'height' => 450);
         $cart_url = array('page' => 'taobaoke-actions.php', 'action' => 'cart', 'item_id' => $row['id'], 'item_title' => $row['title'], 'item_pic' => $row['pict_url'], 'item_url' => urlencode($row['click_url']), 'price'=>$row['price'], 'cid' => $cid, 'name' => $name, 'TB_iframe' => 'true', 'width' => 780, 'height' => 450);
+        $shop_promote_url = array('page' => 'taobaoke-actions.php', 'action' => 'shop', 'shop_owner' => $row['nick'], 'TB_iframe' => 'true', 'width' => 780, 'height' => 450);
 
         return "<a class='thickbox' title='加入推广列表' href='" . buildRawUrl($cart_url) . "' style='color:blue;text-decoration:none'>放入推广列表</a><br />" .
-               "<a class='thickbox' title='推广商品' href='" . buildRawUrl($promote_url) . "' style='color:blue;text-decoration:none'>推广此商品</a>";
+               "<a class='thickbox' title='推广商品' href='" . buildRawUrl($promote_url) . "' style='color:blue;text-decoration:none'>推广此商品</a><br />" .
+               "<a class='thickbox' title='推广店铺' href='" . buildRawUrl($shop_promote_url) . "' style='color:blue;text-decoration:none'>推广该店铺</a><br />";
     }
 
     public function showItemDetail($title, $row) {
         $item_img = $row['pict_url'];
         $item_url = $row['click_url'];
+        $shop_url = buildRawUrl(array('page' => 'taobaoke-actions.php', 'action' => 'shop', 'shop_owner' => $row['nick'], 'TB_iframe' => 'true', 'width' => 780, 'height' => 450));
 
         return <<<ITEM_DETAIL
     <table>
       <tr>
         <td><a class="thickbox" rel="淘宝图片" title="{$title}" href="$item_img"><img src="$item_img" style="width:72px;height:80px"/></a></td>
-        <td>
+        <td align="left">
             <a title="{$title}" class="thickbox" href="{$item_url}&TB_iframe=true&width=640&height=524" >$title</a><br />
-            <span >掌柜：{$row['nick']}</span>
+            <span >掌柜：<a href="{$shop_url}" title="推广该店铺" alt="推广该店铺" class="thickbox" >{$row['nick']}</a></span>
         </td>
       </tr>
     </table>
@@ -128,10 +132,16 @@ function display_page() {
     $has_items = empty($_GET['cid']) && empty($_GET['taobaoke_item_search'])? false : true;
     $vars['has_items'] = $has_items;
 
+    if (!empty($_GET['taobaoke_item_search'])) {
+        $site_url = get_bloginfo('wpurl');
+        taobaoke_anaylysis(array('type' => 'search', 'site_url' => $site_url, 'item_id' => 'taobaoke-product-search', 'item_name' => $_GET['taobaoke_item_search']));
+    }
+
     if ($has_items) {
         $item_controller = new ItemController();
         $item_table = new Table($item_controller, $item_controller->getColumns(), $item_controller->getDatasource());
         $item_table->setNoRecordLabel('该类目下没有商品信息');
+        $item_table->setDefaultOrder('commission_num',  'DESC');
 
         $vars['taobaoke_item_table'] = $item_table;
     }

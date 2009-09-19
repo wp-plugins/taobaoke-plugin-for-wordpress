@@ -8,7 +8,6 @@ function taobaoke_option_menu() {
         add_submenu_page('taobaoke-settings.php', '淘宝客设置', '淘宝客设置', 9, 'taobaoke-settings.php', TAOBAOKE_HOOK_MENU);
         add_submenu_page('taobaoke-settings.php', '淘宝客商品', '淘宝客商品挑选', 9, 'taobaoke-products.php', TAOBAOKE_HOOK_MENU);
         add_submenu_page('taobaoke-settings.php', '我的商品推广', '我的商品推广', 9, 'taobaoke-my-products.php', TAOBAOKE_HOOK_MENU);
-        add_submenu_page('taobaoke-settings.php', '我的店铺推广', '我的店铺推广', 9, 'taobaoke-my-shops.php', TAOBAOKE_HOOK_MENU);
         add_submenu_page('taobaoke-settings.php', '我的商品推广', '我的推广统计', 9, 'taobaoke-my-analyse.php', TAOBAOKE_HOOK_MENU);
 
         $page = add_submenu_page('taobaoke-settings.php', '<span style="display:none">推广操作</span>', '<span style="display:none">推广操作</span>', 9, 'taobaoke-actions.php', TAOBAOKE_HOOK_MENU);
@@ -18,7 +17,7 @@ function taobaoke_option_menu() {
 }
 
 function taobaoke_plugin_admin_styles() {
-    wp_register_style('taobaoke_css', taobaoke_css_path() . 'hide-admin.css', null, '1.2');
+    wp_register_style('taobaoke_css', taobaoke_css_path() . 'hide-admin.css', null, '1.5');
 
     wp_enqueue_style('taobaoke_css');
 }

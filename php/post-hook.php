@@ -80,8 +80,10 @@ function taobaoke_list_fav() {
 					$html = taobaoke_get_post_item_html_full();
 					$html = parse_string($html,
                         taobaoke_show_color('bg'), taobaoke_show_width(), taobaoke_show_color('border'),
-                        $item['item_id'], $item['item_url'], $item['item_pic'], $item['item_pic'], $item['item_title'],
-                        taobaoke_show_color('price'), $item['item_price'], $item['item_id'], $item['item_url']);
+                        $item['item_id'], $item['item_url'],
+						$item['item_pic'], $item['item_id'], $item['item_url'], $item['item_title'],
+                        taobaoke_show_color('price'), $item['item_price'],
+						$item['item_id'], $item['item_url']);
 				}
 				else if (2 == $insert_type) {
 					$html = taobaoke_get_post_item_html();
