@@ -3,7 +3,7 @@
 Plugin Name: Taobaoke Plugin For Wordpress
 Plugin URI: http://blog.gotall.net/index.php/%E6%B7%98%E5%AE%9D%E5%AE%A2/
 Description: 淘宝客的wordpress的插件，可以通过wordpress的后台添加淘宝客的商品或者店铺到您的blog来赚钱。Bug请提交到http://blog.gotall.net
-Version: 1.6
+Version: 1.7
 Author: Wyatt Fang
 Author URI: http://blog.gotall.net/
 */
@@ -34,6 +34,7 @@ if (ereg('/wp-admin/', $_SERVER['REQUEST_URI'])) { // just load in admin
 	add_action('media_buttons', 'taobaoke_media_buttons');
 	add_filter('media_buttons_context', 'taobaoke_media_buttons_context');
     add_action('media_upload_taobaoke_list_fav', 'taobaoke_list_fav');
+	add_action('media_upload_taobaoke_list_search', 'taobaoke_list_search');
 }
 
 include_once(TAO_PATH . 'php/widgets.php');
