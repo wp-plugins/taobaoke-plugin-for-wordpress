@@ -6,6 +6,7 @@ define('APP_SECRET', 'd37bfd74179a2505d1e8c47e8c87a638');
 define('TOP_URL', 'http://gw.api.taobao.com/router/rest');
 //define('TOP_URL', 'http://gw.sandbox.taobao.com/router/rest');
 define('TOP_PID', 'mm_13770637_0_0');
+define('TOP_NICK', 'wyattfang');
 
 define('TAOBAOKE_CART_TABLE', 'taobaoke_cart');
 define('TAOBAOKE_PROMOTE_TABLE', 'taobaoke_promote');
