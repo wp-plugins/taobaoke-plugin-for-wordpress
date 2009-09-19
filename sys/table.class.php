@@ -476,7 +476,9 @@ class Table {
             $order = 'ASC';
         }
         if (array_key_exists($column, $this->_columns)) {
-            $this->__default_order_by = 'ORDER BY `' . $column . '` ' . $order;
+            $this->__default_order_by = array($column => $order);
+            $this->__order_by_field = $column;
+            $this->__order_by_order = $order;
         }
     }
 
