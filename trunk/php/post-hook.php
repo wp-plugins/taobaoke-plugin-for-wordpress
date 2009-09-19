@@ -45,11 +45,45 @@ function taobaoke_media_buttons_context($context) {
 
     $title = '添加淘宝客商品';
     $image_btn = taobaoke_img_path() . 'ke.gif';
+	$search_btn = taobaoke_img_path() . 'search.png';
 
     $out = ' <a href="' . $media_upload_iframe_src . '&tab=taobaoke_list_fav&TB_iframe=true&height=500&width=640" class="thickbox" title="' . $title .
            '"><img width="13px" height="13px" src="' . $image_btn . '" alt="添加淘宝客商品" /></a>';
+	$out .= '<a href="' . $media_upload_iframe_src . '&tab=taobaoke_list_search&TB_iframe=true&height=500&width=640" class="thickbox" title="插入搜索关键字' .
+           '"><img width="22px" height="22px" src="' . $search_btn . '" alt="添加淘宝客搜索关键字" /></a>';
 
 	return $context . $out;
+}
+
+function taobaoke_list_search() {
+
+	if (!empty($_POST['taobaoke_search_keyword'])) {
+		$keyword = $_POST['taobaoke_search_keyword'];
+
+		$taobaoke_api = new TaobaokeApi();
+		$request = new TaobaokeGetSearchUrlRequest();
+		$request->setKeyword($keyword);
+		$request->setNick(var_get('nickname', 'wyattfang'));
+		$request->setOuterCode('blog');
+
+		$search_result = $taobaoke_api->getSearchUrl($request);
+		if (null != $search_result && array_key_exists('taobaokeItems', $search_result) && count($search_result['taobaokeItems']) > 0) {
+			$search_url = $search_result['taobaokeItems'][0]['list_url_by_q'];
+
+			$alias = $keyword;
+			if (!empty($_POST['taobaoke_search_alias'])) {
+				$alias = $_POST['taobaoke_search_alias'];
+			}
+
+			$external_pic_url = taobaoke_img_path() . 'external.png';
+
+			media_send_to_editor("<a style=\"color:#3366BB;-moz-background-clip：border;-moz-background-inline-policy:continuous;-moz-background-origin:padding;background:transparent url({$external_pic_url}) no-repeat scroll right center;padding-right:13px\" href='{$search_url}' target='_blank'>{$alias}</a>");
+		}
+		else {
+			$message = '抱歉，获取淘宝客搜索链接失败，请重试或者换个关键词！';
+		}
+	}
+	include_once taobaoke_tpl_path() . 'search-ref.tpl.php';
 }
 
 function taobaoke_list_fav() {
@@ -93,6 +127,7 @@ function taobaoke_list_fav() {
 					$html = taobaoke_get_post_item_html();
 					$html = parse_string($html, $item['item_id'], $item['item_url'], 'alignright', $item['item_title'], $item['item_pic'], $item['item_title']);
 				}
+
 				media_send_to_editor($html);
 			}
 		}
