@@ -1,15 +1,20 @@
 #adminmenu {
     display:none;
+    width:0px;
 }
 
 #wphead {
     display:none;
 }
 
-#contextual-help-link-wrap {
+#contextual-help-link {
     display:none;
 }
 
 #footer {
     display:none;
+}
+
+#screen-meta {
+    width:0px;
 }
