@@ -21,5 +21,9 @@ class TaobaokeApi extends TaobaoApi {
     public function convertShop(TaobaokeShopConvertRequest $request) {
         return $this->sendRequest($request, 'TaobaokeApi:convertShop', 'taobao.taobaoke.shops.convert');
     }
+
+    public function getSearchUrl(TaobaokeGetSearchUrlRequest $request) {
+        return $this->sendRequest($request, 'TaobaokeApi:getSearchUrl', 'taobao.taobaoke.listurl.get');
+    }
 }
 ?>
