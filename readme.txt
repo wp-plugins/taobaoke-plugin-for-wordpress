@@ -80,6 +80,6 @@ function taobaoke_widget_sidebar()  {
 = 1.6 =
 * 增加了推广店铺的功能；
 
-= 1.6 =
+= 1.7 =
 * 增加了搜索推广的功能；
 
