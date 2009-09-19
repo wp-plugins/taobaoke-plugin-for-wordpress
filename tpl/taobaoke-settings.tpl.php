@@ -19,6 +19,15 @@ endif;
       </tr>
       <tr valign="top">
         <th scope="row">
+          <label for="pid">淘宝客的用户名</label>
+        </th>
+        <td>
+          <input type="text" value="<?php _e_($taobaoke_nickname);?>" name="nickname" size="100"/>
+          <br/>你的<a href="http://taoke.alimama.com/" target="_blank">淘宝客</a>的登录用户名
+        </td>
+      </tr>
+      <tr valign="top">
+        <th scope="row">
           <label for="appkey">淘宝开放平台的APP KEY</label>
         </th>
         <td>
