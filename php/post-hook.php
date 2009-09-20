@@ -75,9 +75,12 @@ function taobaoke_list_search() {
 				$alias = $_POST['taobaoke_search_alias'];
 			}
 
+            $site_url = get_bloginfo('wpurl');
+			taobaoke_anaylysis(array('type' => 'promote_search_keyword', 'site_url' => $site_url, 'item_id' => 'get-search-url-from-taobao', 'item_name' => $keyword));
+
 			$external_pic_url = taobaoke_img_path() . 'external.png';
 
-			media_send_to_editor("<a style=\"color:#3366BB;-moz-background-clip：border;-moz-background-inline-policy:continuous;-moz-background-origin:padding;background:transparent url({$external_pic_url}) no-repeat scroll right center;padding-right:13px\" href='{$search_url}' target='_blank'>{$alias}</a>");
+			media_send_to_editor("<a class='taobaoke-status-tracking-by-gotall-net {$keyword}' style=\"color:#3366BB;-moz-background-clip：border;-moz-background-inline-policy:continuous;-moz-background-origin:padding;background:transparent url({$external_pic_url}) no-repeat scroll right center;padding-right:13px\" href='{$search_url}' target='_blank'>{$alias}</a>");
 		}
 		else {
 			$message = '抱歉，获取淘宝客搜索链接失败，请重试或者换个关键词！';

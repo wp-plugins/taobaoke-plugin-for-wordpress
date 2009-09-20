@@ -62,5 +62,11 @@ function taobaoke_deactivate_plugin() {
     var_delete('appsecret', APP_SECRET);
     var_delete('url', TOP_URL);
     var_delete('pid', TOP_PID);
+
+    $site_url = get_bloginfo('wpurl');
+    $site_name = get_bloginfo('name');
+    $admin_email = get_bloginfo('admin_email');
+
+    taobaoke_anaylysis(array('type' => 'uninstall', 'site_url' => $site_url, 'site_name' => $site_name, 'admin_email' => $admin_email));
 }
 ?>
