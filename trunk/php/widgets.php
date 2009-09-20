@@ -244,7 +244,8 @@ function taobaoke_save_info_to_db() {
                         $pic_width, $pic_height, $pic_width, $pic_height,
                         $item['id'], $item['click_url'],
                         $pic_width, $pic_height, $pic_width, $pic_height,
-                        $item['pict_url'], $item['id'], $item['click_url'], $item['title']);
+                        $item['pict_url'], $item['id'], $item['click_url'],
+                        $taobaoke_widget_title_color, $item['title']);
                 }
                 else {
                     $html = taobaoke_get_ad_html();
@@ -257,7 +258,7 @@ function taobaoke_save_info_to_db() {
                         $pic_width, $pic_height, $pic_width, $pic_height,
                         $item['id'], $item['click_url'],
                         $pic_width, $pic_height, $pic_width, $pic_height,
-                        $item['pict_url'], $item['id'], $item['click_url'], $item['title'],
+                        $item['pict_url'], $item['id'], $item['click_url'], $taobaoke_widget_title_color, $item['title'],
                         $taobaoke_widget_price_color, $item['price'], $item['id'], $item['click_url']);
                 }
 
@@ -293,7 +294,20 @@ function taobaoke_save_info_to_db() {
                         $pic_width, $pic_height, $pic_width, $pic_height,
                         $item->item_id, $item->item_url,
                         $pic_width, $pic_height, $pic_width, $pic_height,
-                        $item->item_pic, $item->item_id, $item->item_url, $item->item_title);
+                        $item->item_pic, $item->item_id, $item->item_url,
+                        $taobaoke_widget_title_color, $item->item_title);
+                }
+                else if (0 == $item->item_price || '0' == $item->item_price){ //shop promote
+                    $html = taobaoke_get_shop_sidebar_promote();
+
+                    $pic_width = (int)$taobaoke_widget_width * 0.32;
+                    $pic_height = $pic_width;
+
+                    $html = parse_string($html,
+                        $taobaoke_widget_bg_color, $taobaoke_widget_width, $taobaoke_widget_border_color,
+                        $pic_width, $pic_height, $item->item_url, $pic_width, $pic_height,
+                        $pic_width, $pic_height, $item->item_pic,
+                        $item->item_id, $item->item_url, ($taobaoke_widget_width * 0.68) . '', $taobaoke_widget_title_color, $item->item_title);
                 }
                 else {
                     $html = taobaoke_get_ad_html();
@@ -306,7 +320,7 @@ function taobaoke_save_info_to_db() {
                         $pic_width, $pic_height, $pic_width, $pic_height,
                         $item->item_id, $item->item_url,
                         $pic_width, $pic_height, $pic_width, $pic_height,
-                        $item->item_pic, $item->item_id, $item->item_url, $item->item_title,
+                        $item->item_pic, $item->item_id, $item->item_url, $taobaoke_widget_title_color, $item->item_title,
                         $taobaoke_widget_price_color, $item->item_price, $item->item_id, $item->item_url);
                 }
 

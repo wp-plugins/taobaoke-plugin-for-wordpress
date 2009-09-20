@@ -128,7 +128,8 @@ function taobaoke_action_promote() {
                         $pic_width, $pic_height, $pic_width, $pic_height,
                         $item['id'], $item['click_url'],
                         $pic_width, $pic_height, $pic_width, $pic_height,
-                        $item['pict_url'], $item['id'], $item['click_url'], $item['title'],
+                        $item['pict_url'], $item['id'], $item['click_url'],
+                        taobaoke_show_color('title'), $item['title'],
                         taobaoke_show_color('price'), $item['price'], $item['id'], $item['click_url']);
                 }
             }
@@ -138,7 +139,8 @@ function taobaoke_action_promote() {
                     $pic_width, $pic_height, $pic_width, $pic_height,
                     $item['id'], $item_url,
                     $pic_width, $pic_height, $pic_width, $pic_height,
-                    $item_pic, $item['id'], $item_url, $item_title,
+                    $item_pic, $item['id'], $item_url,
+                    taobaoke_show_color('title'), $item_title,
                     taobaoke_show_color('price'), $item_price, $item['id'], $item_url);
             }
         }
@@ -222,6 +224,7 @@ function taobaoke_sub_action_promote() {
     $item_title = empty($_GET['item_title']) ? '-' : urldecode($_GET['item_title']);
     $item_pic = empty($_GET['item_pic']) ? '#' : urldecode($_GET['item_pic']);
     $item_url = empty($_GET['click_url']) ? '#' : urldecode($_GET['click_url']);
+    $shop_owner = empty($_GET['shop_owner']) ? '-' : $_GET['shop_owner'];
 
     $user = wp_get_current_user();
     $user_id = $user->id;
@@ -242,13 +245,14 @@ function taobaoke_sub_action_promote() {
         $pic_width = ($width * 0.32) . '';
         $html = parse_string($html,
             taobaoke_show_color('bg'), $width, taobaoke_show_color('border'),
-            $pic_width, $pic_width, $item_url, $pic_width, $pic_width, $pic_width, $pic_width, $item_pic,
-            $item_url, ($width * 0.68) . '', $item_title);
+            $pic_width, $pic_width, $item_url, $pic_width, $pic_width,
+            $pic_width, $pic_width, $item_pic,
+            $shop_owner, $item_url, ($width * 0.68) . '', taobaoke_show_color('title'), $item_title);
     }
     else {
         $html = taobaoke_get_shop_sidebar_promote_text();
         $html = parse_string($html,
-            $item_url, $width, $item_title);
+            $shop_owner, $item_url, $width, taobaoke_show_color('title'), $item_title);
     }
 
     //$var['taobaoke_message'] = '添加商品推广成功！';
