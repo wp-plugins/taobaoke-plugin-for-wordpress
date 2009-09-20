@@ -4,7 +4,7 @@ Donate link:  http://blog.gotall.net/index.php/淘宝客/
 Tags: taobaoke, 淘宝客, 广告, 推广, 阿里妈妈, 淘宝, Tao Bao Ke, Tao bao ke
 Requires at least: 2.8.2
 Tested up to: 2.8.4
-Stable tag: 1.7
+Stable tag: 1.7.1
 淘宝客的wordpress的插件，可以通过wordpress的后台添加淘宝客的商品到您的blog来赚钱，目前版本中可以在wordpress后台方便的浏览淘宝客的商品和分类列表，然后选择热门的商品推广到站点的sidebar或者博客页面中。更多功能还在陆续加入中。
 
 
@@ -87,3 +87,5 @@ function taobaoke_widget_sidebar()  {
 = 1.7 =
 * 增加了搜索推广的功能；
 
+= 1.7.1 =
+* 修复了几个使用者提的bug。
