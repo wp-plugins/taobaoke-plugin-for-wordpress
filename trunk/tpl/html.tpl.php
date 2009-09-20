@@ -23,7 +23,7 @@ $html = <<<HTML
       <div class="clearing"></div>
     </td>
     <td colspan="2" >
-      <a class="taobaoke-status-tracking-by-gotall-net %s" target="_blank" href="%s"   style="height:40px;margin:5px;line-height:20px;color:#0000FF">
+      <a class="taobaoke-status-tracking-by-gotall-net %s" target="_blank" href="%s"   style="height:40px;margin:5px;line-height:20px;color:#%s">
         %s
       </a>
     </td>
@@ -57,7 +57,7 @@ $html = <<<HTML
       <div class="clearing"></div>
     </td>
     <td colspan="2" >
-      <a class="taobaoke-status-tracking-by-gotall-net %s" target="_blank" href="%s"   style="height:40px;margin:5px;line-height:20px;color:#0000FF">
+      <a class="taobaoke-status-tracking-by-gotall-net %s" target="_blank" href="%s"   style="height:40px;margin:5px;line-height:20px;color:#%s">
         %s
       </a>
     </td>
@@ -125,7 +125,7 @@ function taobaoke_get_shop_sidebar_promote() {
           <div class="clearing"></div>
         </td>
         <td colspan="2" >
-          <a target="_blank" href="%s" style="height:40px;width:%dpx;margin:5px;line-height:20px;color:#0000FF">%s</a>
+          <a class="taobaoke-status-tracking-by-gotall-net %s" target="_blank" href="%s" style="height:40px;width:%dpx;margin:5px;line-height:20px;color:#%s">%s</a>
         </td>
       </tr>
     </table>
@@ -136,6 +136,6 @@ HTML;
 
 function taobaoke_get_shop_sidebar_promote_text() {
     return <<<HTML
-    <a target="_blank" href="%s" style="height:40px;width:%dpx;margin:5px;line-height:20px;color:#0000FF">%s</a>
+    <a class="taobaoke-status-tracking-by-gotall-net %s" target="_blank" href="%s" style="height:40px;width:%dpx;margin:5px;line-height:20px;color:#%s">%s</a>
 HTML;
 }
