@@ -1,10 +1,10 @@
 ﻿=== Taobaoke Plugin For Wordpress ===
-Contributors: <a href="http://blog.gotall.net">Wyatt Fang</a>, <a href="http://b.blakehan.com">Blake Han</a>
-Donate link:  http://blog.gotall.net/index.php/淘宝客/
+Contributors: <a href="http://blog.da-fang.com">Wyatt Fang</a>, <a href="http://b.blakehan.com">Blake Han</a>
+Donate link:  http://blog.da-fang.com/index.php/淘宝客/
 Tags: taobaoke, 淘宝客, 广告, 推广, 阿里妈妈, 淘宝, Tao Bao Ke, Tao bao ke
 Requires at least: 2.8.2
-Tested up to: 2.8.4
-Stable tag: 1.7.2
+Tested up to: 2.8.6
+Stable tag: 1.8
 淘宝客的wordpress的插件，可以通过wordpress的后台添加淘宝客的商品到您的blog来赚钱，目前版本中可以在wordpress后台方便的浏览淘宝客的商品和分类列表，然后选择热门的商品推广到站点的sidebar或者博客页面中。更多功能还在陆续加入中。
 
 
@@ -89,3 +89,7 @@ function taobaoke_widget_sidebar()  {
 
 = 1.7.1 =
 * 修复了几个使用者提的bug。
+
+= 1.8 =
+* 修复了IE下面把“小工具”页 安装淘宝客插件 后无法显示的问题；
+* 鉴于大家申请APP KEY比较困难的问题，内置了申请好的APP KEY，方便大家使用；

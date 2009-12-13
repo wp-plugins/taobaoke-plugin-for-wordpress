@@ -79,21 +79,27 @@
         <td>
           <input type="text" size=20 value="<?php echo taobaoke_show_color('border'); ?>" name="taobaoke_widget_border_color" id="taobaoke_widget_border_color" />
           <script type="text/javascript">
-            $('#taobaoke_widget_border_color, #taobaoke_widget_bg_color, #taobaoke_widget_title_color, #taobaoke_widget_price_color').ColorPicker({
-                onSubmit: function(hsb, hex, rgb, el) {
-                    $(el).val(hex);
-                    $(el).ColorPickerHide();
-                },
-                onBeforeShow: function () {
-                    $(this).ColorPickerSetColor(this.value);
-                }
-            });
+            function loadColorPicker() {
+              if(document.readyState != null && document.readyState != "complete") {
+                  setTimeout(function(){loadColorPicker()}, 1000);
+                  return;
+              }
+
+              $('#taobaoke_widget_border_color, #taobaoke_widget_bg_color, #taobaoke_widget_title_color, #taobaoke_widget_price_color').ColorPicker({
+                  onSubmit: function(hsb, hex, rgb, el) {
+                      $(el).val(hex);
+                      $(el).ColorPickerHide();
+                  },
+                  onBeforeShow: function () {
+                      $(this).ColorPickerSetColor(this.value);
+                  }
+              });
+
+            }
+            loadColorPicker();
           </script>
         </td>
       </tr>
     </table>
-  </li>
-  <li>
-    <span style="color:#A9A9A9">预览功能开发中，<a href="http://blog.gotall.net/" target="_blank">招募开发者...</a></span>
   </li>
 </ul>
