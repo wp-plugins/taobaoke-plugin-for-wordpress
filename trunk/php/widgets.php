@@ -85,7 +85,7 @@ function taobaoke_widget_sidebar_promote($args) {
                 $content .= $cur->item_html . '<br />';
             }
 
-            $content .= "<table width=95%><tr><td align='right'>Powered by <a href='http://blog.gotall.net/index.php/%E6%B7%98%E5%AE%9D%E5%AE%A2/' target='_blank'>Got All</a></td></tr></table>";
+            $content .= "<table width=95%><tr><td align='right'>Powered by <a href='http://blog.da-fang.com/index.php/%E6%B7%98%E5%AE%9D%E5%AE%A2/' target='_blank'>大房小站</a></td></tr></table>";
         }
     }
     else {

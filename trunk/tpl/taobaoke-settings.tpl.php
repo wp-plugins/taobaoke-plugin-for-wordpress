@@ -31,7 +31,7 @@ endif;
           <label for="appkey">淘宝开放平台的APP KEY</label>
         </th>
         <td>
-          <input type="text" value="<?php _e_($taobaoke_appkey); ?>" name="appkey" size="100"/>
+          <input type="password" value="<?php _e_($taobaoke_appkey); ?>" name="appkey" size="100"/>
           <br/>这里是您申请的淘宝开放平台应用服务的APP KEY，可以保持默认，使用本plugin申请的APP KEY<br/>
         </td>
       </tr>
@@ -40,7 +40,7 @@ endif;
           <label for="appsecret">淘宝开放平台的APP SECRET</label>
         </th>
         <td>
-          <input type="text" value="<?php _e_($taobaoke_appsecret); ?>" name="appsecret" size="100"/>
+          <input type="password" value="<?php _e_($taobaoke_appsecret); ?>" name="appsecret" size="100"/>
           <br/>这里是您申请的淘宝开放平台应用服务的APP SECRET，可以保持默认，使用本plugin申请的APP Secret<br/>
         </td>
       </tr>
