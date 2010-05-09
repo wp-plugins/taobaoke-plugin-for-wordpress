@@ -2,7 +2,65 @@
 define('QUERY_REGEXP', '/(%d|%s|%%|%f|%b|%n)/');
 define('PLUGIN_PREFIX', 'taobaoke-wordpress-plugin-');
 
+function pid_get() {
+    global $current_user;
+    get_currentuserinfo();
+
+    $var_key = PLUGIN_PREFIX . $current_user->ID . '-pid';
+
+    $value = get_option($var_key, null);
+
+    return $value;
+}
+
+function pid_set($value) {
+    global $current_user;
+    get_currentuserinfo();
+
+    $var_key = PLUGIN_PREFIX . $current_user->ID . '-pid';
+
+    if (null != get_option($var_key, null)) {
+        update_option($var_key, $value);
+    }
+    else {
+        add_option($var_key, $value);
+    }
+}
+
+function nickname_get() {
+    global $current_user;
+    get_currentuserinfo();
+
+    $var_key = PLUGIN_PREFIX . $current_user->ID . '-nickname';
+
+    $value = get_option($var_key, null);
+
+    return $value;
+}
+
+function nickname_set($value) {
+    global $current_user;
+    get_currentuserinfo();
+
+    $var_key = PLUGIN_PREFIX . $current_user->ID . '-nickname';
+
+    if (null != get_option($var_key, null)) {
+        update_option($var_key, $value);
+    }
+    else {
+        add_option($var_key, $value);
+    }
+}
+
 function var_get($var_key, $var_default = null) {
+    if (function_exists($var_key . '_get')) {
+        $value = call_user_func($var_key . '_get');
+
+        if (null != $value) {
+            return $value;
+        }
+    }
+
     $var_key = PLUGIN_PREFIX . $var_key;
     $value = get_option($var_key, $var_default);
 
@@ -10,6 +68,10 @@ function var_get($var_key, $var_default = null) {
 }
 
 function var_set($var_key, $var_value) {
+    if (function_exists($var_key . '_set')) {
+        return call_user_func($var_key . '_set', $var_value);
+    }
+
     if (null != var_get($var_key, null)) {
         update_option(PLUGIN_PREFIX . $var_key, $var_value);
     }
