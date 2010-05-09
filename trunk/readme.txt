@@ -4,12 +4,12 @@ Donate link:  http://blog.da-fang.com/index.php/淘宝客/
 Tags: taobaoke, 淘宝客, 广告, 推广, 阿里妈妈, 淘宝, Tao Bao Ke, Tao bao ke
 Requires at least: 2.8.2
 Tested up to: 2.8.6
-Stable tag: 1.8
+Stable tag: 1.9
 淘宝客的wordpress的插件，可以通过wordpress的后台添加淘宝客的商品到您的blog来赚钱，目前版本中可以在wordpress后台方便的浏览淘宝客的商品和分类列表，然后选择热门的商品推广到站点的sidebar或者博客页面中。更多功能还在陆续加入中。
 
 
 == Description ==
-<h1><a href="http://blog.gotall.net/index.php/%E6%B7%98%E5%AE%9D%E5%AE%A2/"更多详细的介绍，请参见作者插件的页面。</a></h1>
+<h1><a href="http://blog.da-fang.com/index.php/%E6%B7%98%E5%AE%9D%E5%AE%A2/"更多详细的介绍，请参见作者插件的页面。</a></h1>
 淘宝客的wordpress的插件，可以通过wordpress的后台添加淘宝客的商品到您的blog来赚钱，目前版本中可以在wordpress后台方便的浏览淘宝客的商品和分类列表，然后选择热门的商品推广到站点的sidebar或者博客页面中。更多功能还在陆续加入中。
 
 安装详见安装步骤，这里有一点需要注意，目前我申请的淘宝客的应用的APP KEY正在审核中,大家可以临时使用下面的APP KEY来获取数据, 7天后在更新至最新的APP KEY. 我接下来会写一篇申请淘宝开放平台APP KEY的介绍文章，大家可以申请自己的APP KEY。
@@ -23,6 +23,7 @@ App Secret：d37bfd74179a2505d1e8c47e8c87a638
 4. 可以选择自己喜欢的商品放入推广列表，编写博文的时候，可以通过该plugin定制在文本编辑框上的icon选择商品插入到文章中(支持插入图片广告，图片+文字广告)；
 5. 通过该插件编写的widget工具，可以在“小工具”页面添加侧边栏淘宝客广告，轻轻一拖，你选择的淘宝客商品推广便出现在侧边栏了，而且，更为方便的，你可以定制化你的淘宝客侧边栏商品推广样式，让你不用到阿里妈妈淘宝客主页，也能拥有相同的便捷推广享受。
 6. 可以选择商品的同时选择店铺推广。
+7. 增加了多用户支持，每个用户都可以设置自己的淘宝客信息。
 
 == Installation ==
 
@@ -93,3 +94,6 @@ function taobaoke_widget_sidebar()  {
 = 1.8 =
 * 修复了IE下面把“小工具”页 安装淘宝客插件 后无法显示的问题；
 * 鉴于大家申请APP KEY比较困难的问题，内置了申请好的APP KEY，方便大家使用；
+
+= 1.9 =
+* 增加了多用户的支持，使每个用户都可以设置自己的pid和淘宝客nickname；
