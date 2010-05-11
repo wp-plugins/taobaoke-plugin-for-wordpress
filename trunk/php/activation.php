@@ -11,6 +11,8 @@ function taobaoke_activate_plugin() {
 
     taobaoke_anaylysis(array('type' => 'install', 'site_url' => $site_url, 'site_name' => $site_name, 'admin_email' => $admin_email));
     taobaoke_install_db();
+
+    add_role('Taobaoke Management', '±à¼­(ÌÔ±¦¿ÍÈ¨ÏÞ)', array('Use Taobaoke'));
 }
 
 function taobaoke_install_db() {
@@ -68,5 +70,7 @@ function taobaoke_deactivate_plugin() {
     $admin_email = get_bloginfo('admin_email');
 
     taobaoke_anaylysis(array('type' => 'uninstall', 'site_url' => $site_url, 'site_name' => $site_name, 'admin_email' => $admin_email));
+
+    remove_role('Taobaoke Management');
 }
 ?>
