@@ -4,11 +4,11 @@ define ('TAOBAOKE_HOOK_MENU', 'dispatch_page');
 function taobaoke_option_menu() {
     if (function_exists('add_options_page')) {
         //add_options_page('淘宝客设置页面', '淘宝客', 9, 'php/taobaoke-settings.php', 'dispatch_page');
-        add_menu_page('淘宝客', '淘宝客', 'Taobaoke Management', 'taobaoke-settings.php', 'dispatch_page');
-        add_submenu_page('taobaoke-settings.php', '淘宝客设置', '淘宝客设置', 'Taobaoke Management', 'taobaoke-settings.php', TAOBAOKE_HOOK_MENU);
-        add_submenu_page('taobaoke-settings.php', '淘宝客商品', '淘宝客商品挑选', 'Taobaoke Management', 'taobaoke-products.php', TAOBAOKE_HOOK_MENU);
-        add_submenu_page('taobaoke-settings.php', '我的商品推广', '我的商品推广', 'Taobaoke Management', 'taobaoke-my-products.php', TAOBAOKE_HOOK_MENU);
-        add_submenu_page('taobaoke-settings.php', '我的商品推广', '我的推广统计', 'Taobaoke Management', 'taobaoke-my-analyse.php', TAOBAOKE_HOOK_MENU);
+        add_menu_page('淘宝客', '淘宝客', 'use taobaoke', 'taobaoke-settings.php', 'dispatch_page');
+        add_submenu_page('taobaoke-settings.php', '淘宝客设置', '淘宝客设置', 'use taobaoke', 'taobaoke-settings.php', TAOBAOKE_HOOK_MENU);
+        add_submenu_page('taobaoke-settings.php', '淘宝客商品', '淘宝客商品挑选', 'use taobaoke', 'taobaoke-products.php', TAOBAOKE_HOOK_MENU);
+        add_submenu_page('taobaoke-settings.php', '我的商品推广', '我的商品推广', 'use taobaoke', 'taobaoke-my-products.php', TAOBAOKE_HOOK_MENU);
+        add_submenu_page('taobaoke-settings.php', '我的商品推广', '我的推广统计', 'use taobaoke', 'taobaoke-my-analyse.php', TAOBAOKE_HOOK_MENU);
 
         $page = add_submenu_page('taobaoke-settings.php', '<span style="display:none">推广操作</span>', '<span style="display:none">推广操作</span>', 9, 'taobaoke-actions.php', TAOBAOKE_HOOK_MENU);
         add_action('admin_print_styles-' . $page, 'taobaoke_plugin_admin_styles');
