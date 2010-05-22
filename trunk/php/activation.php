@@ -12,7 +12,13 @@ function taobaoke_activate_plugin() {
     taobaoke_anaylysis(array('type' => 'install', 'site_url' => $site_url, 'site_name' => $site_name, 'admin_email' => $admin_email));
     taobaoke_install_db();
 
-    add_role('Taobaoke Management', '±à¼­(ÌÔ±¦¿ÍÈ¨ÏÞ)', array('Use Taobaoke'));
+    global $wp_roles;
+    $roles = $wp_roles->get_names();
+    foreach ($roles as $role_name => $name) {
+        $role_object = get_role($role_name);
+
+        $role_object->add_cap('use taobaoke');
+    }
 }
 
 function taobaoke_install_db() {
@@ -71,6 +77,12 @@ function taobaoke_deactivate_plugin() {
 
     taobaoke_anaylysis(array('type' => 'uninstall', 'site_url' => $site_url, 'site_name' => $site_name, 'admin_email' => $admin_email));
 
-    remove_role('Taobaoke Management');
+    global $wp_roles;
+    $roles = $wp_roles->get_names();
+    foreach ($roles as $role_name => $role_desplay_name) {
+        $role_object = get_role($role_name);
+
+        $role_object->remove_cap('use taobaoke');
+    }
 }
 ?>
