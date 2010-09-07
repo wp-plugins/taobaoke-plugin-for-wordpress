@@ -67,8 +67,8 @@ function taobaoke_list_search() {
 		$request->setOuterCode('blog');
 
 		$search_result = $taobaoke_api->getSearchUrl($request);
-		if (null != $search_result && array_key_exists('taobaokeItems', $search_result) && count($search_result['taobaokeItems']) > 0) {
-			$search_url = $search_result['taobaokeItems'][0]['list_url_by_q'];
+		if (null != $search_result && array_key_exists('taobaoke_item', $search_result)) {
+			$search_url = $search_result['taobaoke_item']['keyword_click_url'];
 
 			$alias = $keyword;
 			if (!empty($_POST['taobaoke_search_alias'])) {

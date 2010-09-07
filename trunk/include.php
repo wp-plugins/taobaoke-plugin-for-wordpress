@@ -2,7 +2,7 @@
 define('TAO_PATH', dirname(__FILE__) . '/');
 
 define('APP_KEY', '12004702');
-define('APP_SECRET', 'b4034d558a5c808047848a31bb98940c');
+define('APP_SECRET', '08a096729647d3db476bcddfe06dbc97');
 define('TOP_URL', 'http://gw.api.taobao.com/router/rest');
 //define('TOP_URL', 'http://gw.sandbox.taobao.com/router/rest');
 define('TOP_PID', 'mm_13770637_0_0');
@@ -20,4 +20,5 @@ define('TAOBAOKE_SIDEBAR_PRICE_COLOR', 'CC0000');
 define('TAOBAOKE_SIDEBAR_BORDER_COLOR', 'E6E6E6');
 define('TAOBAOKE_SIDEBAR_WIDTH', 250);
 define('TAOBAOKE_SIDEBAR_HEIGHT', 90);
-?>
+
+define('DEBUG', false);

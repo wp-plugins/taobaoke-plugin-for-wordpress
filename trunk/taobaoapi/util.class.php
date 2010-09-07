@@ -18,6 +18,7 @@ class Util {
      */
     static public function createSign ($paramArr) {
         $sign = var_get('appsecret');
+        $secret = $sign;
 
         ksort($paramArr);
 
@@ -27,7 +28,7 @@ class Util {
             }
         }
 
-        $sign = strtoupper(md5($sign));
+        $sign = strtoupper(md5($sign . $secret));
 
         return $sign;
     }

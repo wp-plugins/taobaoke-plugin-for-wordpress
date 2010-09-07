@@ -4,7 +4,7 @@
     <td align="center">
       <form method="get">
         <input type="text" size="40" name="taobaoke_item_search" id="taobaoke_item_search" />
-        <input class="button" style="font-weight:bold" type="submit"  value="搜索一下，你就知道" />
+        <input class="button" style="font-weight:bold" type="submit"  value="淘宝一下" />
         <span style="font-size:10px;font-style:italic;">留空搜索全部...</span>
         <?php if (count($query_string)):?>
           <?php foreach($query_string as $key => $value):

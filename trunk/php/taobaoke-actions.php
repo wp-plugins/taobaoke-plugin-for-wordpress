@@ -122,26 +122,26 @@ function taobaoke_action_promote() {
             $pic_height = $pic_width;
 
             if (null != $result) {
-                foreach ($result['taobaokeItems'] as $item) {
+                foreach ($result['taobaoke_items']['taobaoke_item'] as $item) {
                     $html = parse_string($html,
                         taobaoke_show_color('bg'), taobaoke_show_width(), taobaoke_show_color('border'),
                         $pic_width, $pic_height, $pic_width, $pic_height,
-                        $item['id'], $item['click_url'],
+                        $item['iid'], $item['click_url'],
                         $pic_width, $pic_height, $pic_width, $pic_height,
-                        $item['pict_url'], $item['id'], $item['click_url'],
+                        $item['pic_url'], $item['iid'], $item['click_url'],
                         taobaoke_show_color('title'), $item['title'],
-                        taobaoke_show_color('price'), $item['price'], $item['id'], $item['click_url']);
+                        taobaoke_show_color('price'), $item['price'], $item['iid'], $item['click_url']);
                 }
             }
             else {
                 $html = parse_string($html,
                     taobaoke_show_color('bg'), taobaoke_show_width(), taobaoke_show_color('border'),
                     $pic_width, $pic_height, $pic_width, $pic_height,
-                    $item['id'], $item_url,
+                    $item['iid'], $item_url,
                     $pic_width, $pic_height, $pic_width, $pic_height,
-                    $item_pic, $item['id'], $item_url,
+                    $item_pic, $item['iid'], $item_url,
                     taobaoke_show_color('title'), $item_title,
-                    taobaoke_show_color('price'), $item_price, $item['id'], $item_url);
+                    taobaoke_show_color('price'), $item_price, $item['iid'], $item_url);
             }
         }
         catch (Exception $e) {
@@ -317,18 +317,18 @@ function taobaoke_action_shop() {
     $shop_request->setNick($shop_owner);
     $shop_result = $taobaoke_api->getShop($shop_request);
     if (null != $shop_result) {
-        if (array_key_exists('shops', $shop_result) && count($shop_result['shops']) > 0) {
-            $shop = $shop_result['shops'][0];
+        if (array_key_exists('shop', $shop_result)) {
+            $shop = $shop_result['shop'];
 
             $shop_convert_request = new TaobaokeShopConvertRequest();
             $shop_convert_request->setFields();
             $shop_convert_request->set0uterCode('blog');
-            $shop_convert_request->setNick(var_get('nickname', 'wyattfang'));//TODO
+            $shop_convert_request->setNick($shop['nick']);
             $shop_convert_request->setSids($shop['sid']);
 
             $shop_convert_result = $taobaoke_api->convertShop($shop_convert_request);
-            if (null != $shop_convert_result && array_key_exists('taobaokeShops', $shop_convert_result) && count($shop_convert_result['taobaokeShops']) > 0) {
-                $converted_shop = $shop_convert_result['taobaokeShops'][0];
+            if (null != $shop_convert_result && array_key_exists('taobaoke_shops', $shop_convert_result) && count($shop_convert_result['taobaoke_shops']['taobaoke_shop']) > 0) {
+                $converted_shop = $shop_convert_result['taobaoke_shops']['taobaoke_shop'][0];
 
                 $var['shop'] = $shop;
                 $var['converted_shop'] = $converted_shop;
@@ -340,7 +340,7 @@ function taobaoke_action_shop() {
                 $var['shop_promote_url'] = buildUrl(array('sub_action'=>'promote', 'item_id'=>$shop['sid'], 'item_title'=>$item_title, 'item_pic'=>$pic_url, 'click_url'=>$click_url));
             }
             else {
-                $var['message'] = '店铺推广URL转换失败,请稍候重试!';
+                $var['message'] = '当前店铺没有开通推广功能,推广后您没有收入, 所以还是不要推广他吧.';
             }
         }
     }

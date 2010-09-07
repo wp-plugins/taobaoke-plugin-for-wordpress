@@ -84,7 +84,7 @@ class TaobaokeItemsDataSource extends DataSource {
 
             $items = $this->_taobao_api->getItems($this->request);
 
-            $this->_total_data = $items['taobaokeItems'];
+            $this->_total_data = $items['taobaoke_items']['taobaoke_item'];
             $this->_data_count = count($this->_total_data);
 
             if ($this->_data_count > 0) {

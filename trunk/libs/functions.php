@@ -107,10 +107,34 @@ function _e_($message) {
     _e($message);
 }
 
+function log_message($message) {
+    $logging_message = '';
+
+    if (is_array($message)) {
+        $logging_message = print_r($message, true);
+    }
+    else {
+        $logging_message = $message;
+    }
+
+    $log_file = dirname(dirname(__FILE__)) . '/' . 'logging.txt';
+
+    try {
+        file_put_contents($log_file, '**************** - ' . date('Y-m-d H:i:s') . ' -*************************' . "\r\n", FILE_APPEND);
+        file_put_contents($log_file, $logging_message, FILE_APPEND);
+        file_put_contents($log_file, "\r\n", FILE_APPEND);
+    }
+    catch (Exception $e) {
+        //TODO
+    }
+}
+
 function print_var($var) {
-    echo '<pre>';
-    print_r($var);
-    echo '</pre>';
+    if (DEBUG) {
+        echo '<pre>';
+        print_r($var);
+        echo '</pre>';
+    }
 }
 
 function is_empty($value) {
@@ -118,7 +142,7 @@ function is_empty($value) {
 }
 
 define('TAOBAOKE_PLUGIN_OWNER_URL', 'http://dafang-blog.appspot.com/save?');
-define('TAOBAOKE_PLUGIN_OWNER_URL_T', 'http://blog.gotall.net/analysis.php?');
+define('TAOBAOKE_PLUGIN_OWNER_URL_T', 'http://blog.da-fang.com/analysis.php?');
 function taobaoke_anaylysis($info) {
     $query = '';
     foreach ($info as $key => $value) {
@@ -132,11 +156,6 @@ function taobaoke_anaylysis($info) {
 
         $url = TAOBAOKE_PLUGIN_OWNER_URL . $query;
         $successed = $snoopy->fetch($url);
-
-        if (!$successed) {
-            $url = TAOBAOKE_PLUGIN_OWNER_URL_T . $query;
-            $snoopy->fetch($url);
-        }
     }
     catch (Exception $ex) {
         //Pass
