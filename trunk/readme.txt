@@ -1,10 +1,11 @@
-﻿=== Taobaoke Plugin For Wordpress ===
+﻿=== Taobaoke Plugin For Wordpress(淘宝客) ===
 Contributors: <a href="http://blog.da-fang.com">Wyatt Fang</a>
-Donate link:  http://blog.da-fang.com/index.php/淘宝客/
+Donate link:  http://blog.da-fang.com/
 Tags: taobaoke, 淘宝客, 广告, 推广, 阿里妈妈, 淘宝, Tao Bao Ke, Tao bao ke
 Requires at least: 2.8.2
 Tested up to: 3.1.0
 Stable tag: 2.2.2
+
 淘宝客的wordpress的插件，可以通过wordpress的后台添加淘宝客的商品到您的blog来赚钱。
 
 == Description ==
@@ -104,3 +105,11 @@ function taobaoke_widget_sidebar()  {
 
 = 2.2.2 =
 * 升级API版本从1.0到2.0
+
+== Arbitrary section ==
+
+N/A
+
+== A brief Markdown Example ==
+
+N/A
