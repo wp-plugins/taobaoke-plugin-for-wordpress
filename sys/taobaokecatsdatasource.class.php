@@ -62,7 +62,7 @@ class TaobaokeCatsDataSource extends DataSource {
 
             $result = $this->_taobao_cat_api->getItemCats($request);
 
-            $cat_items = $result['item_cats'];
+            $cat_items = $result['item_cats']['item_cat'];
 
             $this->_total = count($cat_items);
             $this->_total_data = $cat_items;

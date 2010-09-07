@@ -85,7 +85,7 @@ function taobaoke_widget_sidebar_promote($args) {
                 $content .= $cur->item_html . '<br />';
             }
 
-            $content .= "<table width=95%><tr><td align='right'>Powered by <a href='http://blog.da-fang.com/index.php/%E6%B7%98%E5%AE%9D%E5%AE%A2/' target='_blank'>大房小站</a></td></tr></table>";
+            $content .= "<table width=95%><tr><td align='right'>Powered by <a href='http://blog.da-fang.com/index.php/%E6%B7%98%E5%AE%9D%E5%AE%A2/' target='_blank'>淘宝客</a></td></tr></table>";
         }
     }
     else {
@@ -147,12 +147,12 @@ function taobaoke_save_info_to_db() {
         $html = taobaoke_get_ad_raw_text();
 
         if (null != $result) {
-            foreach ($result['taobaokeItems'] as $item) {
-                $converted_success[$item['id']] = true;
+            foreach ($result['taobaoke_items']['taobaoke_item'] as $item) {
+                $converted_success[$item['iid']] = true;
 
-                $html = parse_string($html, $item['id'], $item['click_url'], $item['title']);
+                $html = parse_string($html, $item['iid'], $item['click_url'], $item['title']);
 
-                $item_id = $item['id'];
+                $item_id = $item['iid'];
                 $wpdb->query(
                     "UPDATE $table_name SET `item_html` = '$html' WHERE `user_id` = $user_id AND `item_id` = '$item_id';"
                 );
@@ -221,8 +221,8 @@ function taobaoke_save_info_to_db() {
 
     if ($iids !== '') {
         if (null != $result) {
-            foreach ($result['taobaokeItems'] as $item) {
-                $converted_success[$item['id']] = true;
+            foreach ($result['taobaoke_items']['taobaoke_item'] as $item) {
+                $converted_success[$item['iid']] = true;
 
                 $html = '';
                 if ('pic' == $taobaoke_widget_show_item) {
@@ -231,8 +231,8 @@ function taobaoke_save_info_to_db() {
                     $html = parse_string($html,
                         $taobaoke_widget_bg_color, $taobaoke_widget_width, $taobaoke_widget_border_color,
                         $taobaoke_widget_width - 2, $taobaoke_widget_height -2,
-                        $item['id'], $item['click_url'], $taobaoke_widget_width - 2, $taobaoke_widget_height -2,
-                        $item['pict_url']);
+                        $item['iid'], $item['click_url'], $taobaoke_widget_width - 2, $taobaoke_widget_height -2,
+                        $item['pic_url']);
                 }
                 else if ('pic-title' == $taobaoke_widget_show_item) {
                     $html = taobaoke_get_ad_html_pic_title();
@@ -242,9 +242,9 @@ function taobaoke_save_info_to_db() {
                     $html = parse_string($html,
                         $taobaoke_widget_bg_color, $taobaoke_widget_width, $taobaoke_widget_border_color,
                         $pic_width, $pic_height, $pic_width, $pic_height,
-                        $item['id'], $item['click_url'],
+                        $item['iid'], $item['click_url'],
                         $pic_width, $pic_height, $pic_width, $pic_height,
-                        $item['pict_url'], $item['id'], $item['click_url'],
+                        $item['pic_url'], $item['iid'], $item['click_url'],
                         $taobaoke_widget_title_color, $item['title']);
                 }
                 else {
@@ -256,13 +256,13 @@ function taobaoke_save_info_to_db() {
                     $html = parse_string($html,
                         $taobaoke_widget_bg_color, $taobaoke_widget_width, $taobaoke_widget_border_color,
                         $pic_width, $pic_height, $pic_width, $pic_height,
-                        $item['id'], $item['click_url'],
+                        $item['iid'], $item['click_url'],
                         $pic_width, $pic_height, $pic_width, $pic_height,
-                        $item['pict_url'], $item['id'], $item['click_url'], $taobaoke_widget_title_color, $item['title'],
-                        $taobaoke_widget_price_color, $item['price'], $item['id'], $item['click_url']);
+                        $item['pic_url'], $item['iid'], $item['click_url'], $taobaoke_widget_title_color, $item['title'],
+                        $taobaoke_widget_price_color, $item['price'], $item['iid'], $item['click_url']);
                 }
 
-                $item_id = $item['id'];
+                $item_id = $item['iid'];
                 $wpdb->query(
                     "UPDATE $table_name SET `item_html` = '$html' WHERE `user_id` = $user_id AND `item_id` = '$item_id';"
                 );

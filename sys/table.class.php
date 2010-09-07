@@ -370,8 +370,11 @@ class Table {
      */
     private function constructPager($text, $link_page, $class, $has_separator = FALSE) {
         $pager = array ('text' => $text, 'link' => NULL, 'class' => $class, 'separator' => $has_separator ? '|' : NULL);
-        $pager['link'] = self::PARAMETER_PAGE_PREFIX . self::$_table_index . '='. $link_page;
-        $pager['link'] = $this->addParameter($pager['link']);
+
+        if ($text != $this->__current_page) {
+            $pager['link'] = self::PARAMETER_PAGE_PREFIX . self::$_table_index . '='. $link_page;
+            $pager['link'] = $this->addParameter($pager['link']);
+        }
 
         return $pager;
     }

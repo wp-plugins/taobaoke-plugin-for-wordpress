@@ -28,14 +28,11 @@ class ItemController {
             'title' => array(
                 'header' => '商品推广信息',
                 'sortable' => false,
+                'header_style' => 'width:30%',
                 'function' => 'showItemDetail'
             ),
             'price' => array(
                 'header' => '单价',
-                'sortable' => true,
-            ),
-            'commission_rate' => array(
-                'header' => '佣金比率',
                 'sortable' => true,
             ),
             'commission' => array(
@@ -77,8 +74,8 @@ class ItemController {
         $cid = empty($_GET['cid']) ? 0 : $_GET['cid'];
         $name = empty($_GET['name']) ? 'no-name' : $_GET['name'];
 
-        $promote_url = array('page' => 'taobaoke-actions.php', 'action' => 'promote', 'item_id' => $row['id'], 'item_title' => $row['title'], 'item_pic' => $row['pict_url'], 'item_url' => urlencode($row['click_url']), 'price'=>$row['price'], 'cid' => $cid, 'name' => $name, 'TB_iframe' => 'true', 'width' => 780, 'height' => 450);
-        $cart_url = array('page' => 'taobaoke-actions.php', 'action' => 'cart', 'item_id' => $row['id'], 'item_title' => $row['title'], 'item_pic' => $row['pict_url'], 'item_url' => urlencode($row['click_url']), 'price'=>$row['price'], 'cid' => $cid, 'name' => $name, 'TB_iframe' => 'true', 'width' => 780, 'height' => 450);
+        $promote_url = array('page' => 'taobaoke-actions.php', 'action' => 'promote', 'item_id' => $row['iid'], 'item_title' => $row['title'], 'item_pic' => $row['pic_url'], 'item_url' => urlencode($row['click_url']), 'price'=>$row['price'], 'cid' => $cid, 'name' => $name, 'TB_iframe' => 'true', 'width' => 780, 'height' => 450);
+        $cart_url = array('page' => 'taobaoke-actions.php', 'action' => 'cart', 'item_id' => $row['iid'], 'item_title' => $row['title'], 'item_pic' => $row['pic_url'], 'item_url' => urlencode($row['click_url']), 'price'=>$row['price'], 'cid' => $cid, 'name' => $name, 'TB_iframe' => 'true', 'width' => 780, 'height' => 450);
         $shop_promote_url = array('page' => 'taobaoke-actions.php', 'action' => 'shop', 'shop_owner' => $row['nick'], 'TB_iframe' => 'true', 'width' => 780, 'height' => 450);
 
         return "<a class='thickbox' title='加入推广列表' href='" . buildRawUrl($cart_url) . "' style='color:blue;text-decoration:none'>放入推广列表</a><br />" .
@@ -87,7 +84,7 @@ class ItemController {
     }
 
     public function showItemDetail($title, $row) {
-        $item_img = $row['pict_url'];
+        $item_img = $row['pic_url'];
         $item_url = $row['click_url'];
         $shop_url = buildRawUrl(array('page' => 'taobaoke-actions.php', 'action' => 'shop', 'shop_owner' => $row['nick'], 'TB_iframe' => 'true', 'width' => 780, 'height' => 450));
 

@@ -2,7 +2,8 @@
 class TaobaoApi {
     protected $_params = array( //common fields
         'format'    => 'json',
-        'v'         => '1.0',
+        'v'         => '2.0',
+        'sign_method' => 'md5',
         'fields'    => '',
         );
 
@@ -16,7 +17,7 @@ class TaobaoApi {
         }
     }
 
-    protected function validateJsonResult($json_result, $taobao_api = 'taobao.api') {
+    protected function parseJsonResult($json_result, $taobao_api = 'taobao.api') {
         $json_parsed = Json::jsonDecode($json_result);
 
         if (array_key_exists('error_rsp', $json_parsed)) { //查询失败
@@ -29,7 +30,7 @@ class TaobaoApi {
             throw new ApiNoResultException('Result is empty!', -1, $taobao_api);//-1的意思是当前查询没有数据返回
         }
         else {
-            return $json_parsed['rsp'];
+            return $json_parsed;
         }
     }
 
@@ -43,10 +44,19 @@ class TaobaoApi {
         $this->_params['method'] = $api;
 
         $item_result_json = Util::getResult($this->_params);
+
+        if (DEBUG) {
+            log_message($item_result_json);
+        }
+
         $entity_result = null;
 
         try {
-            $entity_result = $this->validateJsonResult($item_result_json, $api);
+            $entity_result = $this->parseJsonResult($item_result_json, $api);
+
+            if (DEBUG) {
+                log_message($entity_result);
+            }
         }
         catch (ApiException $ex) {
             handle_exception($ex);

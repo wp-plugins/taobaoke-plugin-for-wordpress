@@ -50,6 +50,6 @@ endif;
 <p class="submit">
     <!-- <input type="submit" value="保存" name="save" class="button"/>-->
     <input type="submit" value="保存" class="button-primary" name="Taobaoke-Submit"/>
-    <a target="_blank"  class="button-primary" href="http://blog.gotall.net/index.php/淘宝客/">获取可以使用的App Key和App Secret</a>
+    <a target="_blank"  class="button-primary" href="http://blog.da-fang.com/index.php/淘宝客/">获取可以使用的App Key和App Secret</a>
 </p>
 </form>

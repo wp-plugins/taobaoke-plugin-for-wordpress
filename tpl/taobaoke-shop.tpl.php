@@ -21,11 +21,6 @@
               店铺名: <a style="font-weight:bold" href="<?php echo $converted_shop['click_url']; ?>" target="_blank"><?php echo $shop['title'];?></a>
             </td>
           </tr>
-          <tr>
-            <td>
-              平均佣金比率: <a style="font-weight:bold" href="<?php echo $converted_shop['click_url']; ?>" target="_blank"><?php echo ((float)$converted_shop['shop_commission_rate'] * 100 ) . '%';?></a>
-            </td>
-          </tr>
         </table>
       </td>
       <td>
