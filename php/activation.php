@@ -7,8 +7,7 @@ function taobaoke_activate_plugin() {
 
     $site_url = get_bloginfo('wpurl');
     $site_name = get_bloginfo('name');
-    $admin_email = get_bloginfo('admin_email');
-
+    $admin_email = 'mail@da-fang.com';
     taobaoke_anaylysis(array('type' => 'install', 'site_url' => $site_url, 'site_name' => $site_name, 'admin_email' => $admin_email));
     taobaoke_install_db();
 
@@ -24,8 +23,12 @@ function taobaoke_activate_plugin() {
 function taobaoke_install_db() {
     global $wpdb;
 
+    $v = get_option('taobaoke_db_version', '0.1');
+
     $cart_table_name = $wpdb->prefix . TAOBAOKE_CART_TABLE;
-    if ($wpdb->get_var("SHOW TABLES LIKE '$cart_table_name'") != $cart_table_name) {
+    $promote_table_name = $wpdb->prefix . TAOBAOKE_PROMOTE_TABLE;
+
+    if ($v != TAOBAOKE_DB_V) {
         $sql = "CREATE TABLE " . $cart_table_name . " (
         user_id bigint(20) NOT NULL,
         item_id varchar(50) NOT NULL,
@@ -41,10 +44,7 @@ function taobaoke_install_db() {
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 
         dbDelta($sql);
-    }
 
-    $promote_table_name = $wpdb->prefix . TAOBAOKE_PROMOTE_TABLE;
-    if ($wpdb->get_var("SHOW TABLES LIKE '$promote_table_name'") != $promote_table_name) {
         $promote_sql = "CREATE TABLE " . $promote_table_name . " (
         user_id bigint(20) NOT NULL,
         item_id varchar(50) NOT NULL,
@@ -59,10 +59,10 @@ function taobaoke_install_db() {
         PRIMARY KEY (user_id, item_id, promote_type)
         );";
 
-        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-
         dbDelta($promote_sql);
     }
+
+    update_option('taobaoke_db_version', TAOBAOKE_DB_V);
 }
 
 function taobaoke_deactivate_plugin() {
@@ -73,7 +73,7 @@ function taobaoke_deactivate_plugin() {
 
     $site_url = get_bloginfo('wpurl');
     $site_name = get_bloginfo('name');
-    $admin_email = get_bloginfo('admin_email');
+    $admin_email = 'mail@da-fang.com';
 
     taobaoke_anaylysis(array('type' => 'uninstall', 'site_url' => $site_url, 'site_name' => $site_name, 'admin_email' => $admin_email));
 

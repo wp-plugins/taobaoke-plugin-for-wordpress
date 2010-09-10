@@ -7,6 +7,7 @@ define('TOP_URL', 'http://gw.api.taobao.com/router/rest');
 //define('TOP_URL', 'http://gw.sandbox.taobao.com/router/rest');
 define('TOP_PID', 'mm_13770637_0_0');
 define('TOP_NICK', 'wyattfang');
+define('TAO_URL', 'http://tao.da-fang.com/');
 
 define('TAOBAOKE_CART_TABLE', 'taobaoke_cart');
 define('TAOBAOKE_PROMOTE_TABLE', 'taobaoke_promote');
@@ -22,3 +23,4 @@ define('TAOBAOKE_SIDEBAR_WIDTH', 250);
 define('TAOBAOKE_SIDEBAR_HEIGHT', 90);
 
 define('DEBUG', false);
+define('TAOBAOKE_DB_V', '1.0');

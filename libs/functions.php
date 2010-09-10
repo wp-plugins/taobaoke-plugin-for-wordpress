@@ -27,6 +27,18 @@ function pid_set($value) {
     }
 }
 
+function appkey_get() {
+    $default = '12004702';
+
+    return $default;
+}
+
+function appsecret_get() {
+    $default = '08a096729647d3db476bcddfe06dbc97';
+
+    return $default;
+}
+
 function nickname_get() {
     global $current_user;
     get_currentuserinfo();
@@ -142,7 +154,7 @@ function is_empty($value) {
 }
 
 define('TAOBAOKE_PLUGIN_OWNER_URL', 'http://dafang-blog.appspot.com/save?');
-define('TAOBAOKE_PLUGIN_OWNER_URL_T', 'http://blog.da-fang.com/analysis.php?');
+define('TAOBAOKE_PLUGIN_OWNER_URL_T', TAO_URL . 'analysis.php?');
 function taobaoke_anaylysis($info) {
     $query = '';
     foreach ($info as $key => $value) {
