@@ -78,9 +78,9 @@ class ItemController {
         $cart_url = array('page' => 'taobaoke-actions.php', 'action' => 'cart', 'item_id' => $row['iid'], 'item_title' => $row['title'], 'item_pic' => $row['pic_url'], 'item_url' => urlencode($row['click_url']), 'price'=>$row['price'], 'cid' => $cid, 'name' => $name, 'TB_iframe' => 'true', 'width' => 780, 'height' => 450);
         $shop_promote_url = array('page' => 'taobaoke-actions.php', 'action' => 'shop', 'shop_owner' => $row['nick'], 'TB_iframe' => 'true', 'width' => 780, 'height' => 450);
 
-        return "<a class='thickbox' title='加入推广列表' href='" . buildRawUrl($cart_url) . "' style='color:blue;text-decoration:none'>放入推广列表</a><br />" .
-               "<a class='thickbox' title='推广商品' href='" . buildRawUrl($promote_url) . "' style='color:blue;text-decoration:none'>推广此商品</a><br />" .
-               "<a class='thickbox' title='推广店铺' href='" . buildRawUrl($shop_promote_url) . "' style='color:blue;text-decoration:none'>推广该店铺</a><br />";
+        return "<a class='thickbox' title='加入收藏' href='" . buildRawUrl($cart_url) . "' style='color:blue;text-decoration:none'>加入收藏</a><br />" .
+               "<a class='thickbox' title='推广商品' href='" . buildRawUrl($promote_url) . "' style='color:blue;text-decoration:none'>推广商品</a><br />" .
+               "<a class='thickbox' title='推广店铺' href='" . buildRawUrl($shop_promote_url) . "' style='color:blue;text-decoration:none'>推广店铺</a><br />";
     }
 
     public function showItemDetail($title, $row) {
@@ -141,6 +141,15 @@ function display_page() {
         $item_table->setDefaultOrder('commission_num',  'DESC');
 
         $vars['taobaoke_item_table'] = $item_table;
+    }
+
+    $hot_products = get_hot_keywords();
+ 
+    if (isset($hot_products['hotkeywords'])) {
+        $vars['hots'] = $hot_products['hotkeywords'];
+    }
+    else { 
+        $vars['hots'] = array("连衣裙", "女包", "凉鞋", "iPhone 4G", "诺基亚", "加湿器", "暖手宝", "口罩", "核桃", "长寿果", "帮宝适", "多美滋", "美的", "豆浆机", "电磁炉", "假发", "欧莱雅", "保湿", "蜜雪儿", "BB霜", "蒙奇奇", "毛衣链", "HTC", "艾莱依", "登山鞋", "艾莱依", "羽绒服", "杰克琼斯", "韩版", "Tata", "长靴", "百丽", "UGG", "打底衫", "毛衣");
     }
 
     return $vars;

@@ -1,5 +1,5 @@
 <?php
-class MyPromoteItems {
+class MyFavItems {
     public function getColumns() {
         return array (
             'item_title' => array(
@@ -22,7 +22,7 @@ class MyPromoteItems {
 
     public function getDataSource() {
         global $wpdb;
-        $table = $wpdb->prefix . TAOBAOKE_PROMOTE_TABLE;
+        $table = $wpdb->prefix . TAOBAOKE_CART_TABLE;
         $user = wp_get_current_user();
         $user_id = $user->id;
 
@@ -34,7 +34,7 @@ class MyPromoteItems {
     }
 
     public function showActions($null, $row) {
-        $url = buildUrl(array('action' => 'delete_promote', 'item_id' => $row['item_id']));
+        $url = buildUrl(array('action' => 'delete_fav', 'item_id' => $row['item_id']));
         return "<a href=\"{$url}\">删除</a>";
     }
 }
@@ -44,16 +44,16 @@ function display_page() {
 
     if (!empty($_GET['action'])) {
         global $wpdb;
-        if ('delete_promote' == $_GET['action']) {
+        if ('delete_fav' == $_GET['action']) {
             $item_id = $_GET['item_id'];
-            $table = $wpdb->prefix . TAOBAOKE_PROMOTE_TABLE;
+            $table = $wpdb->prefix . TAOBAOKE_CART_TABLE;
             $wpdb->query("DELETE FROM {$table} WHERE `item_id` = '$item_id'");
         }
     }
 
-    $promote_controller = new MyPromoteItems();
-    $promote_table = new Table($promote_controller, $promote_controller->getColumns(), $promote_controller->getDataSource());
-    $vars['promote_table'] = $promote_table;
+    $fav_controller = new MyFavItems();
+    $fav_table = new Table($fav_controller, $fav_controller->getColumns(), $fav_controller->getDataSource());
+    $vars['fav_table'] = $fav_table;
 
     return $vars;
 }

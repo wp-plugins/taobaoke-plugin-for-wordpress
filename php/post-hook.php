@@ -116,11 +116,7 @@ function taobaoke_list_fav() {
 				if (1 == $insert_type) {
 					$html = taobaoke_get_post_item_html_full();
 					$html = parse_string($html,
-                        taobaoke_show_color('bg'), taobaoke_show_width(), taobaoke_show_color('border'),
-                        $item['item_id'], $item['item_url'],
-						$item['item_pic'], $item['item_id'], $item['item_url'], $item['item_title'],
-                        taobaoke_show_color('price'), $item['item_price'],
-						$item['item_id'], $item['item_url']);
+                        $item['item_id'], $item['item_url'], $item['item_title']);
 				}
 				else if (2 == $insert_type) {
 					$html = taobaoke_get_post_item_html();
@@ -130,7 +126,6 @@ function taobaoke_list_fav() {
 					$html = taobaoke_get_post_item_html();
 					$html = parse_string($html, $item['item_id'], $item['item_url'], 'alignright', $item['item_title'], $item['item_pic'], $item['item_title']);
 				}
-
 				media_send_to_editor($html);
 			}
 		}
