@@ -2,6 +2,12 @@
 define('QUERY_REGEXP', '/(%d|%s|%%|%f|%b|%n)/');
 define('PLUGIN_PREFIX', 'taobaoke-wordpress-plugin-');
 
+function taobaoke_cache_get($key) {
+}
+
+function taobaoke_cache_set($key, $value, $expires) {
+}
+
 function pid_get() {
     global $current_user;
     get_currentuserinfo();
@@ -10,7 +16,7 @@ function pid_get() {
 
     $value = get_option($var_key, null);
 
-    return $value;
+    return stripslashes($value);
 }
 
 function pid_set($value) {
@@ -84,7 +90,12 @@ function var_set($var_key, $var_value) {
         return call_user_func($var_key . '_set', $var_value);
     }
 
-    if (null != var_get($var_key, null)) {
+    $value = var_get($var_key, null);
+
+    if (null !== $value) {
+        update_option(PLUGIN_PREFIX . $var_key, $var_value);
+    }
+    else if ('' === $value) {
         update_option(PLUGIN_PREFIX . $var_key, $var_value);
     }
     else {
@@ -408,5 +419,37 @@ function taobaoke_show_color($item) {
     }
 
     return $color;
+}
+
+function get_hot_keywords() {
+    $json = taobaoke_cache_get('taobaoke_hot_products');
+    if (isset($json)) {
+        return Json::jsonDecode($json);
+    }
+
+    $api_url = API_URL . 'service/hotkeywords/';
+
+    $keywords = null;
+    $json_result = <<<JSONCODE
+{ "totalCount": 34, "hotkeywords": [ "连衣裙", "女包", "凉鞋", "iPhone 4G", "诺基亚", "加湿器", "暖手宝", "口罩", "核桃", "长寿果", "帮宝适", "多美滋", "美的", "豆浆机", "电磁炉", "假发", "欧莱雅", "保湿", "蜜雪儿", "BB霜", "蒙奇奇", "毛衣链", "HTC", "艾莱依", "登山鞋", "艾莱依", "羽绒服", "杰克琼斯", "韩版", "Tata", "长靴", "百丽", "UGG", "打底衫", "毛衣" ] }
+JSONCODE;
+
+    try {
+        $json_result = file_get_contents($api_url); 
+
+        $keywords = Json::jsonDecode($json_result);
+    }
+    catch (Exception $e) {
+        //TODO
+        $keywords = Json::jsonDecode($json_result);
+    }
+
+    taobaoke_cache_set('taobaoke_hot_products', $json_result, '');
+
+    return $keywords;
+}
+
+function get_activities() {
+    //pass
 }
 ?>

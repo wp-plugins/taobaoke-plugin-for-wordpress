@@ -8,6 +8,7 @@ define('TOP_URL', 'http://gw.api.taobao.com/router/rest');
 define('TOP_PID', 'mm_13770637_0_0');
 define('TOP_NICK', 'wyattfang');
 define('TAO_URL', 'http://tao.da-fang.com/');
+define('API_URL', 'http://api.taobaoke.31tao.com/');
 
 define('TAOBAOKE_CART_TABLE', 'taobaoke_cart');
 define('TAOBAOKE_PROMOTE_TABLE', 'taobaoke_promote');

@@ -87,24 +87,32 @@ endif;
                 <tbody>
                  <tr valign="top">
                    <th scope="row">
-                    <label for="pid">自动在文章末尾插入<a href="http://taoke.alimama.com/activity_list.htm" target="_blank">淘宝客活动推广</a></label>
+                    <label for="taobaoke-auto-activity-ad">自动在文章末尾插入<a href="http://taoke.alimama.com/activity_list.htm" target="_blank">淘宝客活动推广</a></label>
                    </th>
                    <td>
-                     <input type="checkbox" value=1 />
+                   <input type="checkbox" <?php if ($taobaoke_auto_activity) print 'checked';?> value=1 name="taobaoke-auto-activity-ad" />
                    </td>
                  </tr>
                  <tr valign="top">
                    <th scope="row">
-                    <label for="pid">自动在文章末尾插入<a href="http://taoke.alimama.com/activity_list.htm" target="_blank">我挑选的商品</a></label>
+                    <label for="taobaoke-auto-product-ad">自动在文章末尾插入<a href="http://taoke.alimama.com/activity_list.htm" target="_blank">我挑选的商品</a></label>
                    </th>
                    <td>
-                     <input type="checkbox" value=1 />
+                   <input type="checkbox" <?php if ($taobaoke_auto_product) print 'checked'; ?> value=1 name="taobaoke-auto-product-ad" />
+                   </td>
+                 </tr>
+                 <tr valign="top">
+                   <th scope="row">
+                    <label for="taobaoke-auto-keywords">自动在文章末尾插入 热销单品</label>
+                   </th>
+                   <td>
+                   <input type="checkbox" <?php if ($taobaoke_auto_hot_products) print 'checked'; ?> value=1 name="taobaoke-auto-hot-products" />
                    </td>
                  </tr>
                  <tr>
                    <td colspan="2" style="text-align:left">
                      <p class="submit" style="margin-left:20px">
-                       <input type="submit" value="保存" class="button-primary" name="Taobaoke-Submit"/>
+                       <input type="submit" value="保存" class="button-primary" name="Taobaoke-Auto-Ad"/>
                      </p>
                    </td>
                  </tr>
@@ -122,9 +130,9 @@ endif;
           <!--box content begin-->
             <form method="post">
                <h4>&nbsp;&nbsp;将文章中出现的以下关键词自动替换成淘宝推广关键词(空格分隔)：</h4>
-               <textarea style="margin-left:10px;margin-bottom:10px;" cols=60 rows=5 name="taobao-keywords">月饼 手机</textarea>
+               <textarea style="margin-left:10px;margin-bottom:10px;" cols=60 rows=5 name="taobaoke-keywords"><?php print $taobaoke_keywords;?></textarea>
                <p class="submit" style="margin-left:20px">
-                 <input type="submit" value="保存" class="button-primary" name="Taobaoke-Submit"/>
+                 <input type="submit" value="保存" class="button-primary" name="Taobaoke-Auto-Keywords" />
                </p>
             </form>
           <!--box content end-->
