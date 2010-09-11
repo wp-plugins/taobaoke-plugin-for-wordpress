@@ -7,7 +7,7 @@ class TaobaokeItemsGetRequest extends Request {
 
     public function setFields($fields = null) {
         if (null == $fields) {
-            $fields = 'iid,title,nick,pic_url,price,click_url,commission,commission_rate,commission_num,commission_volume';
+            $fields = 'num_iid,title,nick,pic_url,price,click_url,commission,commission_rate,commission_num,commission_volume';
         }
 
         $this->prop['fields'] = $fields;

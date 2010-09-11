@@ -58,7 +58,7 @@ function taobaoke_action_cart() {
                 $wpdb->prepare("INSERT INTO $cart_table_name VALUES (%d, %s, %s, %s, %s, %s, NOW(), NOW());", $user_id, $item_id, $item_title, $item_pic, $item_price, $item_url)
             );
     }
-    $var['message'] = '添加淘宝推广商品到推广列表成功！';
+    $var['message'] = '收藏商品成功！';
 
     return $var;
 }
@@ -126,22 +126,22 @@ function taobaoke_action_promote() {
                     $html = parse_string($html,
                         taobaoke_show_color('bg'), taobaoke_show_width(), taobaoke_show_color('border'),
                         $pic_width, $pic_height, $pic_width, $pic_height,
-                        $item['iid'], $item['click_url'],
+                        $item['num_iid'], $item['click_url'],
                         $pic_width, $pic_height, $pic_width, $pic_height,
-                        $item['pic_url'], $item['iid'], $item['click_url'],
+                        $item['pic_url'], $item['num_iid'], $item['click_url'],
                         taobaoke_show_color('title'), $item['title'],
-                        taobaoke_show_color('price'), $item['price'], $item['iid'], $item['click_url']);
+                        taobaoke_show_color('price'), $item['price'], $item['num_iid'], $item['click_url']);
                 }
             }
             else {
                 $html = parse_string($html,
                     taobaoke_show_color('bg'), taobaoke_show_width(), taobaoke_show_color('border'),
                     $pic_width, $pic_height, $pic_width, $pic_height,
-                    $item['iid'], $item_url,
+                    $item['num_iid'], $item_url,
                     $pic_width, $pic_height, $pic_width, $pic_height,
-                    $item_pic, $item['iid'], $item_url,
+                    $item_pic, $item['num_iid'], $item_url,
                     taobaoke_show_color('title'), $item_title,
-                    taobaoke_show_color('price'), $item_price, $item['iid'], $item_url);
+                    taobaoke_show_color('price'), $item_price, $item['num_iid'], $item_url);
             }
         }
         catch (Exception $e) {

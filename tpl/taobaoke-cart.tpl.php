@@ -16,5 +16,5 @@ endif;
 </table>
 <br />
 <div style="font-weight:bold">
-  你可以在 新文章 发布页面，有选择的将推广列表中的商品嵌入到文章中，<a href="/wp-admin/post-new.php">赶紧去体验下吧...</a>
+  你可以在 新文章 发布页面，有选择的将您 收藏的商品 嵌入到文章中，<a href="/wp-admin/post-new.php">赶紧去体验下吧...</a>
 </div>

@@ -48,10 +48,12 @@ function display_page() {
         $auto_activity_ad = isset($_POST['taobaoke-auto-activity-ad']) ? $_POST['taobaoke-auto-activity-ad'] : 0;
         $auto_product_ad = isset($_POST['taobaoke-auto-product-ad']) ? $_POST['taobaoke-auto-product-ad'] : 0;
         $auto_hot_product_ad = isset($_POST['taobaoke-auto-hot-products']) ? $_POST['taobaoke-auto-hot-products'] : 0;
+        $sidebar_count = trim($_POST['taobaoke-sidebar-ads-count']);
 
         var_set('auto-activity-ad', $auto_activity_ad);
         var_set('auto-product-ad', $auto_product_ad);
         var_set('auto-hot-products', $auto_hot_product_ad);
+        var_set('sidebar-display-count', $sidebar_count);
     }
 
     if (!empty($_POST['Taobaoke-Auto-Keywords'])) {
@@ -71,6 +73,7 @@ function display_page() {
 
 
     $vars['taobaoke_keywords'] = var_get('auto-keywords');
+    $vars['taobaoke_sidebar_ad_count'] = var_get('sidebar-display-count', 5);
 
     return $vars;
 }

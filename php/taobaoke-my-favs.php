@@ -49,6 +49,65 @@ function display_page() {
             $table = $wpdb->prefix . TAOBAOKE_CART_TABLE;
             $wpdb->query("DELETE FROM {$table} WHERE `item_id` = '$item_id'");
         }
+        else if ('autoclean' == $_GET['action']) {
+            $table = $wpdb->prefix . TAOBAOKE_CART_TABLE;
+            $result = $wpdb->get_results("SELECT `item_id` FROM $table");
+
+            $api = new TaobaokeApi();
+            $request = new TaobaokeItemDetailGetRequest();
+            $request->setFields();
+            $request->setNick(var_get('nickname'));
+            $request->setOuterCode();
+
+            $item_ids = array();
+            $index = 0;
+            foreach ($result as $cur) {
+                $item_ids[] = $cur->item_id;
+
+                $index++;
+                if (10 == $index) {
+                    $iids = implode(',', $item_ids);
+
+                    $request->setIids($iids);
+
+                    $api_result = $api->getItemsDetail($request);
+                    if ($api_result['total_results'] > 0) {
+                        foreach ($api_result['taobaoke_item_details']['taobaoke_item_detail'] as $item_detail) {
+                            $delist_time = $item_detail['item']['delist_time'];
+                            $num_iid = $item_detail['item']['num_iid'];
+
+                            $delist_timestamp = strtotime($delist_time);
+                            if ($delist_timestamp < time()) {
+                                $wpdb->query("DELETE FROM $table WHERE `item_id` = '$num_iid'");
+                            }
+                        }
+
+                        $index = 0;
+                        $item_ids = array();
+                    }
+                }
+            }
+            
+            if (count($item_ids) > 0) {
+                $iids = implode(',', $item_ids);
+
+                $request->setIids($iids);
+
+                $api_result = $api->getItemsDetail($request);
+
+                if ($api_result['total_results'] > 0) {
+                    foreach ($api_result['taobaoke_item_details']['taobaoke_item_detail'] as $item_detail) {
+                        $delist_time = $item_detail['item']['delist_time'];
+                        $num_iid = $item_detail['item']['num_iid'];
+
+                        $delist_timestamp = strtotime($delist_time);
+                        if ($delist_timestamp < time()) {
+                            $wpdb->query("DELETE FROM $table WHERE `item_id` = '$num_iid'");
+                        }
+                    }
+                }
+            }
+        }
     }
 
     $fav_controller = new MyFavItems();

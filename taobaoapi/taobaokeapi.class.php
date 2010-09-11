@@ -13,6 +13,13 @@ class TaobaokeApi extends TaobaoApi {
         return $result['taobaoke_items_get_response'];
     }
 
+    public function getItemsDetail(TaobaokeItemDetailGetRequest $request) {
+        $result = $this->sendRequest($request, 'TaobaokeApi:getItemsDetail', 'taobao.taobaoke.items.detail.get');
+        log_message($result);
+
+        return $result['taobaoke_items_detail_get_response'];
+    }
+
     public function convertItems(TaobaokeItemsConvertRequest $request) {
         //The structure of the $entity_result is: $entity_result = array('taobaokeItems' => array(0=>obj, 1=>obj))
         $result =  $this->sendRequest($request, 'TaobaokeApi:convertItems', 'taobao.taobaoke.items.convert');

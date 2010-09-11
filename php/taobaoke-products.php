@@ -74,8 +74,8 @@ class ItemController {
         $cid = empty($_GET['cid']) ? 0 : $_GET['cid'];
         $name = empty($_GET['name']) ? 'no-name' : $_GET['name'];
 
-        $promote_url = array('page' => 'taobaoke-actions.php', 'action' => 'promote', 'item_id' => $row['iid'], 'item_title' => $row['title'], 'item_pic' => $row['pic_url'], 'item_url' => urlencode($row['click_url']), 'price'=>$row['price'], 'cid' => $cid, 'name' => $name, 'TB_iframe' => 'true', 'width' => 780, 'height' => 450);
-        $cart_url = array('page' => 'taobaoke-actions.php', 'action' => 'cart', 'item_id' => $row['iid'], 'item_title' => $row['title'], 'item_pic' => $row['pic_url'], 'item_url' => urlencode($row['click_url']), 'price'=>$row['price'], 'cid' => $cid, 'name' => $name, 'TB_iframe' => 'true', 'width' => 780, 'height' => 450);
+        $promote_url = array('page' => 'taobaoke-actions.php', 'action' => 'promote', 'item_id' => $row['num_iid'], 'item_title' => $row['title'], 'item_pic' => $row['pic_url'], 'item_url' => urlencode($row['click_url']), 'price'=>$row['price'], 'cid' => $cid, 'name' => $name, 'TB_iframe' => 'true', 'width' => 780, 'height' => 450);
+        $cart_url = array('page' => 'taobaoke-actions.php', 'action' => 'cart', 'item_id' => $row['num_iid'], 'item_title' => $row['title'], 'item_pic' => $row['pic_url'], 'item_url' => urlencode($row['click_url']), 'price'=>$row['price'], 'cid' => $cid, 'name' => $name, 'TB_iframe' => 'true', 'width' => 780, 'height' => 450);
         $shop_promote_url = array('page' => 'taobaoke-actions.php', 'action' => 'shop', 'shop_owner' => $row['nick'], 'TB_iframe' => 'true', 'width' => 780, 'height' => 450);
 
         return "<a class='thickbox' title='加入收藏' href='" . buildRawUrl($cart_url) . "' style='color:blue;text-decoration:none'>加入收藏</a><br />" .

@@ -24,8 +24,8 @@
         </table>
       </td>
       <td>
-        <a class="button-primary" href="<?php echo $shop_fav_url ?>">加入推广列表</a><br /><br />
-        <a class="button-primary" href="<?php echo $shop_promote_url;?>">侧边栏推荐</a>
+        <a class="button-primary" href="<?php echo $shop_fav_url ?>">加入收藏列表</a><br /><br />
+        <a class="button-primary" href="<?php echo $shop_promote_url;?>">侧边栏推广</a>
       </td>
     </tr>
     <tr>

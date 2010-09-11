@@ -4,7 +4,7 @@ if (isset($message)) {
    print  "<div style='font-weight:bold;'>$message</div>";
 }
 ?>
-<h1>已收藏商品列表 - <a href="?page=taobaoke-my-favs.php&action=autoclean">自动去除已下架商品</a></h1>
+<h2>热销活动 - 如果你设置了“自动在文章末尾插入淘宝客活动推广”，以下活动将随机出现在你的文章末尾</h2>
 <?php
-    $fav_table->render();
+    $taobaoke_activity_table->render();
 ?>

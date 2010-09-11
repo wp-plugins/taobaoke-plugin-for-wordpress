@@ -1,14 +1,13 @@
 <?php
-class TaobaokeItemsConvertRequest extends Request {
-
+class TaobaokeItemDetailGetRequest extends Request {
     public function setFields($fields = null) {
         if (null == $fields) {
-            $fields = 'num_iid,title,nick,pic_url,price,click_url,commission,commission_rate,commission_num,commision_volume';
+            $fields = 'num_iid,title,nick,pic_url,price,delist_time';
         }
 
         $this->prop['fields'] = $fields;
     }
-
+    
     public function setIids($iids) {
         $this->prop['num_iids'] = $iids;
     }
@@ -17,8 +16,8 @@ class TaobaokeItemsConvertRequest extends Request {
         $this->prop['nick'] = $nick;
     }
 
-    public function setOutCode($outer_code) {
-        $this->prop['outer_code'] = $outer_code;
+    public function setOuterCode($code = 'blog') {
+        $this->prop['outer_code'] = $code;
     }
 }
 ?>

@@ -131,24 +131,26 @@ function _e_($message) {
 }
 
 function log_message($message) {
-    $logging_message = '';
+    if (DEBUG) {
+        $logging_message = '';
 
-    if (is_array($message)) {
-        $logging_message = print_r($message, true);
-    }
-    else {
-        $logging_message = $message;
-    }
+        if (is_array($message)) {
+            $logging_message = print_r($message, true);
+        }
+        else {
+            $logging_message = $message;
+        }
 
-    $log_file = dirname(dirname(__FILE__)) . '/' . 'logging.txt';
+        $log_file = dirname(dirname(__FILE__)) . '/' . 'logging.txt';
 
-    try {
-        file_put_contents($log_file, '**************** - ' . date('Y-m-d H:i:s') . ' -*************************' . "\r\n", FILE_APPEND);
-        file_put_contents($log_file, $logging_message, FILE_APPEND);
-        file_put_contents($log_file, "\r\n", FILE_APPEND);
-    }
-    catch (Exception $e) {
-        //TODO
+        try {
+            file_put_contents($log_file, '**************** - ' . date('Y-m-d H:i:s') . ' -*************************' . "\r\n", FILE_APPEND);
+            file_put_contents($log_file, $logging_message, FILE_APPEND);
+            file_put_contents($log_file, "\r\n", FILE_APPEND);
+        }
+        catch (Exception $e) {
+            //TODO
+        }   
     }
 }
 
@@ -450,6 +452,18 @@ JSONCODE;
 }
 
 function get_activities() {
-    //pass
+    $api_url = API_URL . 'service/promotions';
+
+    $json_result = '';
+    try {
+        $json_result = file_get_contents($api_url);
+
+        $json_decoded = Json::jsonDecode($json_result);
+
+        return $json_decoded;
+    }
+    catch (Exception $e) {
+        //TODO
+    }
 }
 ?>

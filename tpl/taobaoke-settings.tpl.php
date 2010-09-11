@@ -79,7 +79,7 @@ endif;
       <!-- box begin -->
         <div id="taobaoke-settings" class="postbox" style="display:block">
           <div class="handlediv" title="显示/隐藏"><br /></div>
-          <h3 class="hndle"><span>智能商品推广设置</span></h3>
+          <h3 class="hndle"><span>商品推广设置</span></h3>
           <div class="inside">
           <!--box content begin-->
             <form method="post">
@@ -87,7 +87,7 @@ endif;
                 <tbody>
                  <tr valign="top">
                    <th scope="row">
-                    <label for="taobaoke-auto-activity-ad">自动在文章末尾插入<a href="http://taoke.alimama.com/activity_list.htm" target="_blank">淘宝客活动推广</a></label>
+                    <label for="taobaoke-auto-activity-ad">自动在文章末尾插入<a href="?page=taobaoke-activities.php">淘宝客活动推广</a></label>
                    </th>
                    <td>
                    <input type="checkbox" <?php if ($taobaoke_auto_activity) print 'checked';?> value=1 name="taobaoke-auto-activity-ad" />
@@ -107,6 +107,14 @@ endif;
                    </th>
                    <td>
                    <input type="checkbox" <?php if ($taobaoke_auto_hot_products) print 'checked'; ?> value=1 name="taobaoke-auto-hot-products" />
+                   </td>
+                 </tr>
+                 <tr valign="top">
+                   <th scope="row">
+                    <label for="taobaoke-sidebar-ads-count">侧边栏推广商品展示的数量</label>
+                   </th>
+                   <td>
+                   <input type="text" value=<?php print $taobaoke_sidebar_ad_count; ?> name="taobaoke-sidebar-ads-count" />
                    </td>
                  </tr>
                  <tr>
