@@ -20,13 +20,13 @@
   <li>
     <strong>Q: 一个一个关键字插入是不是很繁琐,有没有导入关键字功能啊?</strong><br />
     <div>
-      A: 目前只开发了手动插入 关键字+链接 的功能, 后面会根据插件的使用情况, 增加导入关键字的功能, 当你在写博客的时候, 会自动把你导入的关键字列表在文章中出现的地方加上淘宝客的链接. 敬请期待和支持 <a href="http://blog.gotall.net/" target="_blank">大房</a> 啊~~
+      A: 目前只开发了手动插入 关键字+链接 的功能, 后面会根据插件的使用情况, 增加导入关键字的功能, 当你在写博客的时候, 会自动把你导入的关键字列表在文章中出现的地方加上淘宝客的链接. 敬请期待和支持 <a href="http://tao.da-fang.com/" target="_blank">大房</a> 啊~~
     </div>
   </li>
   <li>
     <strong>Q: 还有其他功能吗?</strong><br />
     <div style="font-weight:bold;font-size:15px;">
-      A: 如果对于扩展淘宝客插件，你有好的需求和想法，记得告知<a href="http://blog.gotall.net/" target="_blank">大房</a>，我们一起研究~~
+      A: 如果对于扩展淘宝客插件，你有好的需求和想法，记得告知<a href="http://tao.da-fang.com/" target="_blank">大房</a>，我们一起研究~~
     </div>
   </li>
 </ul>
