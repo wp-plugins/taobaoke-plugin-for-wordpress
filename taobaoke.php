@@ -128,6 +128,7 @@ if ($v != TAOBAOKE_DB_V) {
     include_once(TAO_PATH . 'php/activation.php');
 
     taobaoke_install_db(); //upgrade db
+    taobaoke_auto_sync_callback();
 }
 
 // send automatic scheduled auto sync
