@@ -540,6 +540,16 @@ JSONCODE;
     return $keywords;
 }
 
+function auto_sync_activities() {
+    $ac = get_activities();
+
+    var_set('activities', $ac);
+}
+
+function get_activities_from_db() {
+    return var_get('activities');
+}
+
 function get_activities() {
     $api_url = API_URL . 'service/promotions';
 

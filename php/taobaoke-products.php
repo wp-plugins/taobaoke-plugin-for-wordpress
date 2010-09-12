@@ -143,10 +143,10 @@ function display_page() {
         $vars['taobaoke_item_table'] = $item_table;
     }
 
-    $hot_products = get_hot_keywords();
- 
-    if (isset($hot_products['hotkeywords'])) {
-        $vars['hots'] = $hot_products['hotkeywords'];
+    $hot_products = get_hot_keyword_from_db(TAOBAOKE_HOT_KEYWORDS);
+    
+    if (is_array($hot_products) && count($hot_products) > 0) {
+        $vars['hots'] = array_keys($hot_products);
     }
     else { 
         $vars['hots'] = array("连衣裙", "女包", "凉鞋", "iPhone 4G", "诺基亚", "加湿器", "暖手宝", "口罩", "核桃", "长寿果", "帮宝适", "多美滋", "美的", "豆浆机", "电磁炉", "假发", "欧莱雅", "保湿", "蜜雪儿", "BB霜", "蒙奇奇", "毛衣链", "HTC", "艾莱依", "登山鞋", "艾莱依", "羽绒服", "杰克琼斯", "韩版", "Tata", "长靴", "百丽", "UGG", "打底衫", "毛衣");

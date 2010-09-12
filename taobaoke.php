@@ -46,40 +46,39 @@ add_action('wp_head', 'taobaoke_gotall_analytics_vars');
 add_action('wp_footer', 'taobaoke_gotall_analytics');
 
 function taobaoke_add_random_ads($data) {
-    if (var_get('auto-activity-ad', 0) || var_get('auto-product-ad', 0) || var_get('auto-hot-products', 0)) {
-        $random = rand(1, 5);
-        $pid = var_get('pid');
+    $auto_activity = var_get('auto-activity-ad', 0);
+    $auto_hot = var_get('auto-hot-products', 0);
 
-        if (1 == $random || 2 == $random) {
-            $hot_keywords = get_hot_keyword_from_db(TAOBAOKE_HOT_KEYWORDS);
-            if (null != $hot_keywords && is_array($hot_keywords)) { 
+    if ($auto_activity) {
+        $activities = get_activities_from_db();
+        if (isset($activities['totalCount']) && $activities['totalCount'] > 0) {
+            $total = $activities['totalCount'];
+            $rand_ad_index = array_rand($activities['promotions'], 1);
 
-                $rand_hots = count($hot_keywords) > 5 ? array_rand($hot_keywords, 5) : array_rand($hot_keywords, count($hot_keywords));
-                
-                foreach ($rand_hots as $k_index) {
-                    $keyword = $k_index;
-                    $click_url = $hot_keywords[$keyword];
-                    $img_path = taobaoke_img_path();
-                    $ad_html .= "<a class='taobaoke-status-tracking-by-gotall-net $keyword' href='$click_url' target='_blank'>$keyword</a>" . '&nbsp;&nbsp;&nbsp;&nbsp;';
-                }
+            $ad = $activities['promotions'][$rand_ad_index];
 
-                return $data . '<br /><br />' . $ad_html;
-            }
+            $ad_url = str_replace('$pid', $pid, $ad['targetURL']);
+            $ad_pic_url = $ad['picURL'];
+            $activity_html = "<a href='$ad_url' target='_blank' ><img class='alignleft size-thumbnail' src='$ad_pic_url' style='width:200px;height:200px;' /></a>";
+
+            $data = $activity_html . $data;
         }
-        else {
-            $activities = get_activities();
-            if (isset($activities['totalCount']) && $activities['totalCount'] > 0) {
-                $total = $activities['totalCount'];
-                $rand_ad_index = array_rand($activities['promotions'], 1);
+    }
 
-                $ad = $activities['promotions'][$rand_ad_index];
+    if ($auto_hot) {
+        $hot_keywords = get_hot_keyword_from_db(TAOBAOKE_HOT_KEYWORDS);
+        if (null != $hot_keywords && is_array($hot_keywords)) { 
 
-                $ad_url = str_replace('$pid', $pid, $ad['targetURL']);
-                $ad_pic_url = $ad['picURL'];
-                $ad_html = "<a href='$ad_url' target='_blank' ><img class='aligncenter' src='$ad_pic_url' style='width:200px;height:200px;' /></a>";
-
-                return $data . '<br />' . $ad_html;
+            $rand_hots = count($hot_keywords) > 8 ? array_rand($hot_keywords, 8) : array_rand($hot_keywords, count($hot_keywords));
+            
+            foreach ($rand_hots as $k_index) {
+                $keyword = $k_index;
+                $click_url = $hot_keywords[$keyword];
+                $img_path = taobaoke_img_path();
+                $ad_html .= "<a class='taobaoke-status-tracking-by-gotall-net $keyword' href='$click_url' target='_blank'>$keyword</a>" . '&nbsp;&nbsp;&nbsp;&nbsp;';
             }
+
+            $data = $data . '<br /><br />' . $ad_html;
         }
     }
 
@@ -119,6 +118,11 @@ function taobaoke_auto_add_keywords($id) {
     }*/
 }
 
+function taobaoke_auto_sync_callback() {
+    sync_hot_keywords();
+    auto_sync_activities();
+}
+
 $v = get_option('taobaoke_db_version', '0.1');
 if ($v != TAOBAOKE_DB_V) {
     include_once(TAO_PATH . 'php/activation.php');
@@ -129,15 +133,6 @@ if ($v != TAOBAOKE_DB_V) {
 // send automatic scheduled auto sync
 if (!wp_next_scheduled('taobaoke_auto_sync') ) {
 	wp_schedule_event(time(), 'daily', 'taobaoke_auto_sync' ); // hourly, daily and twicedaily
-}
-
-if (!wp_next_scheduled('taobaoke_auto_sync_test') ) {
-	wp_schedule_event(time(), 'hourly', 'taobaoke_auto_sync_test' ); // hourly, daily and twicedaily
-}
-add_action('taobaoke_auto_sync_test','taobaoke_auto_sync_callback');
-
-function taobaoke_auto_sync_callback() {
-    sync_hot_keywords();
 }
 
 add_action('taobaoke_auto_sync','taobaoke_auto_sync_callback');
