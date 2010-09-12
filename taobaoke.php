@@ -48,6 +48,7 @@ add_action('wp_footer', 'taobaoke_gotall_analytics');
 function taobaoke_add_random_ads($data) {
     $auto_activity = var_get('auto-activity-ad', 0);
     $auto_hot = var_get('auto-hot-products', 0);
+    $pid = var_get('pid');
 
     if ($auto_activity) {
         $activities = get_activities_from_db();
