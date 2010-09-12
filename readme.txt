@@ -1,21 +1,19 @@
 ﻿=== Taobaoke Plugin For Wordpress(淘宝客) ===
-Contributors: <a href="http://blog.da-fang.com">Wyatt Fang</a>
-Donate link:  http://blog.da-fang.com/
+Contributors: <a href="http://tao.da-fang.com">Wyatt Fang</a>
+Donate link:  http://tao.da-fang.com/
 Tags: taobaoke, 淘宝客, 广告, 推广, 阿里妈妈, 淘宝, Tao Bao Ke, Tao bao ke
 Requires at least: 2.8.2
-Tested up to: 3.1.0
-Stable tag: 2.2.3
+Tested up to: 3.0.1
+Stable tag: 2.3.0
 
 淘宝客的wordpress的插件，可以通过wordpress的后台添加淘宝客的商品到您的blog来赚钱。
 
 == Description ==
 
-<h1><a href="http://blog.da-fang.com/index.php/%E6%B7%98%E5%AE%9D%E5%AE%A2/"更多详细的介绍，请参见作者插件的页面。</a></h1>
+<h1><a href="http://tao.da-fang.com/"更多详细的介绍，请参见作者插件的页面。</a></h1>
 淘宝客的wordpress的插件，可以通过wordpress的后台添加淘宝客的商品到您的blog来赚钱，目前版本中可以在wordpress后台方便的浏览淘宝客的商品和分类列表，然后选择热门的商品推广到站点的sidebar或者博客页面中。更多功能还在陆续加入中。
 
-安装详见安装步骤，这里有一点需要注意，目前我申请的淘宝客的应用的APP KEY正在审核中,大家可以临时使用下面的APP KEY来获取数据, 7天后在更新至最新的APP KEY. 我接下来会写一篇申请淘宝开放平台APP KEY的介绍文章，大家可以申请自己的APP KEY。
-App Key：12001725
-App Secret：d37bfd74179a2505d1e8c47e8c87a638
+安装详见安装步骤。
 
 
 目前支持的功能有：
@@ -31,11 +29,7 @@ App Secret：d37bfd74179a2505d1e8c47e8c87a638
 
 1. 上传 `taobaoke` 文件夹到你的wordpress插件目录下： `/wp-content/plugins/`
 2. 在插件管理页面激活该插件；
-3. 到“淘宝客”设置界面，设置你的淘宝客pid，这是你获得淘宝客佣金的依据；
-   这里有一点需要注意，目前我申请的淘宝客的应用的APP KEY正在审核中,大家可以临时使用下面的APP KEY来获取数据, 7天后在更新至最新的APP KEY. 我接下来会写一篇申请淘宝开放平台APP KEY的介绍文章，大家可以申请自己的APP KEY。
-App Key：12001725
-App Secret：d37bfd74179a2505d1e8c47e8c87a638
-4. 到淘宝开放平台(http://open.taobao.com)创建一个应用[例如：wordpress淘宝客应用]，获取App Key和App Secret。如果有问题，可以给我留言，我帮忙申请。目前你也可以使用该插件提供的App Key和App Secret。
+3. 到“淘宝客”设置界面，设置你的淘宝客pid，这是你获得淘宝客佣金的依据.
 
 注意：如果你的主题不支持widget，你需要找到你的主题的sidebar.php，把下面的代码增加到你的侧边栏：
 <?php taobaoke_widget_sidebar(); ?>
@@ -105,6 +99,9 @@ function taobaoke_widget_sidebar()  {
 
 = 2.2.2 =
 * 升级API版本从1.0到2.0
+
+= 2.3.0 =
+* 增加了更多的广告位，更多智能化的设置
 
 == Arbitrary section ==
 

@@ -19,6 +19,8 @@ function taobaoke_get_setting($setting_name) {
 }
 
 function display_page() {
+    global $wpdb;
+
     $vars = array();
 
     if (!empty($_POST['Taobaoke-Submit'])) {
@@ -54,10 +56,19 @@ function display_page() {
         var_set('auto-product-ad', $auto_product_ad);
         var_set('auto-hot-products', $auto_hot_product_ad);
         var_set('sidebar-display-count', $sidebar_count);
+
+        sync_hot_keywords();
     }
 
     if (!empty($_POST['Taobaoke-Auto-Keywords'])) {
         $keywords = trim($_POST['taobaoke-keywords']);
+
+        $keywords_array = explode(' ', $keywords);
+        foreach ($keywords_array as $keyword) {
+            $keyword = trim($keyword);
+            $keyword_url = convert_keyword($keyword);
+            add_auto_keyword_to_db($keyword, $keyword_url);
+        }
 
         var_set('auto-keywords', $keywords);
     }

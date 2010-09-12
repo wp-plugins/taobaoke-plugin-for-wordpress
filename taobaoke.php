@@ -1,9 +1,9 @@
 <?php
 /*
 Plugin Name: Taobaoke Plugin For Wordpress
-Plugin URI: http://blog.da-fang.com/index.php/%E6%B7%98%E5%AE%9D%E5%AE%A2/
-Description: 淘宝客的wordpress的插件，可以通过wordpress的后台添加淘宝客的商品或者店铺到您的blog来赚钱。Bug请提交到http://blog.da-fang.com
-Version: 2.2.3
+Plugin URI: http://tao.da-fang.com/
+Description: 淘宝客的wordpress的插件，可以通过wordpress的后台添加淘宝客的商品或者店铺到您的blog来赚钱。Bug请提交到http://tao.da-fang.com
+Version: 2.3.0
 Author: Wyatt Fang
 Author URI: http://blog.da-fang.com/
 */
@@ -13,6 +13,10 @@ define('TAOBAOKE_PLUGIN_FOLDER', $pathinfo['basename']);
 include_once ('include.php');
 wp_enqueue_script('thickbox');
 wp_enqueue_style('thickbox');
+
+if (function_exists('get_currentuserinfo')) {
+    get_currentuserinfo();
+}
 
 $current_page = $_SERVER["PHP_SELF"];
 
@@ -47,19 +51,19 @@ function taobaoke_add_random_ads($data) {
         $pid = var_get('pid');
 
         if (1 == $random || 2 == $random) {
-            $hot_keywords = get_hot_keywords();
-            if (isset($hot_keywords['totalCount']) && $hot_keywords['totalCount'] > 0) {
-                $keywords = array_rand($hot_keywords['hotkeywords'], 5);
-                
-                $ad_html = '';
-                foreach ($keywords as $keyword_index) {
-                    $keyword = $hot_keywords['hotkeywords'][$keyword_index];
-                    $k = rawurlencode($keyword);
+            $hot_keywords = get_hot_keyword_from_db(TAOBAOKE_HOT_KEYWORDS);
+            if (null != $hot_keywords && is_array($hot_keywords)) { 
 
-                    $ad_html .= "<a href='http://search8.taobao.com/browse/search_auction.htm?q=$k&cat=0&pid=$pid&viewIndex=7' target='_blank'>$keyword</a>" . '&nbsp;&nbsp;&nbsp;&nbsp;';
+                $rand_hots = count($hot_keywords) > 5 ? array_rand($hot_keywords, 5) : array_rand($hot_keywords, count($hot_keywords));
+                
+                foreach ($rand_hots as $k_index) {
+                    $keyword = $k_index;
+                    $click_url = $hot_keywords[$keyword];
+                    $img_path = taobaoke_img_path();
+                    $ad_html .= "<a class='taobaoke-status-tracking-by-gotall-net $keyword' href='$click_url' target='_blank'>$keyword</a>" . '&nbsp;&nbsp;&nbsp;&nbsp;';
                 }
 
-                return $data . '<br />' . $ad_html;
+                return $data . '<br /><br />' . $ad_html;
             }
         }
         else {
@@ -78,6 +82,7 @@ function taobaoke_add_random_ads($data) {
             }
         }
     }
+
     return $data;
 }
 
@@ -85,4 +90,55 @@ add_filter('the_content', 'taobaoke_add_random_ads');
 add_filter('the_content_rss', 'taobaoke_add_random_ads');
 add_filter('the_excerpt', 'taobaoke_add_random_ads');
 add_filter('the_excerpt_rss', 'taobaoke_add_random_ads');
+
+add_action("publish_post", "taobaoke_auto_add_keywords");
+add_action("publish_page", "taobaoke_auto_add_keywords");
+add_action("xmlrpc_publish_post", "taobaoke_auto_add_keywords");
+
+function taobaoke_auto_add_keywords($id) {
+    /*
+    global $wpdb;
+    $row = $wpdb->get_row("SELECT post_content FROM $wpdb->posts WHERE id=$id", ARRAY_A);
+
+    $post =  $row["post_content"];
+    
+    $auto_keywords = get_hot_keyword_from_db(TAOBAOKE_AUTO_KEYWORDS);
+    $search = array();
+    $replacement = array();
+    if (is_array($auto_keywords) && count($auto_keywords) > 0) {
+        foreach ($auto_keywords as $keyword => $click_url) {
+            $search[] = $keyword;
+            $replacement[] = "<a href='$click_url' target='_blank'>$keyword</a>";
+        }
+
+        $new_post = str_replace($search, $replacement, $post);
+        $new_post = addslashes($new_post);
+        log_message("UPDATE TABLE $wpdb->posts SET `post_content` = '$new_post' WHERE id = $id;");
+
+        $wpdb->query("UPDATE TABLE $wpdb->posts SET `post_content` = '$new_post' WHERE id = $id;");
+    }*/
+}
+
+$v = get_option('taobaoke_db_version', '0.1');
+if ($v != TAOBAOKE_DB_V) {
+    include_once(TAO_PATH . 'php/activation.php');
+
+    taobaoke_install_db(); //upgrade db
+}
+
+// send automatic scheduled auto sync
+if (!wp_next_scheduled('taobaoke_auto_sync') ) {
+	wp_schedule_event(time(), 'daily', 'taobaoke_auto_sync' ); // hourly, daily and twicedaily
+}
+
+if (!wp_next_scheduled('taobaoke_auto_sync_test') ) {
+	wp_schedule_event(time(), 'hourly', 'taobaoke_auto_sync_test' ); // hourly, daily and twicedaily
+}
+add_action('taobaoke_auto_sync_test','taobaoke_auto_sync_callback');
+
+function taobaoke_auto_sync_callback() {
+    sync_hot_keywords();
+}
+
+add_action('taobaoke_auto_sync','taobaoke_auto_sync_callback');
 ?>

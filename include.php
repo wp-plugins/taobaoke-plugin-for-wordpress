@@ -12,6 +12,8 @@ define('API_URL', 'http://api.taobaoke.31tao.com/');
 
 define('TAOBAOKE_CART_TABLE', 'taobaoke_cart');
 define('TAOBAOKE_PROMOTE_TABLE', 'taobaoke_promote');
+define('TAOBAOKE_AUTO_KEYWORDS', 'taobaoke_auto_keywords');
+define('TAOBAOKE_HOT_KEYWORDS', 'taobaoke_hot_keywords');
 
 include_once (TAO_PATH . 'libs/functions.php');
 

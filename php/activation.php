@@ -18,6 +18,8 @@ function taobaoke_activate_plugin() {
 
         $role_object->add_cap('use taobaoke');
     }
+
+    wp_schedule_event(time(), 'daily', 'taobaoke_auto_sync');
 }
 
 function taobaoke_install_db() {
@@ -27,6 +29,8 @@ function taobaoke_install_db() {
 
     $cart_table_name = $wpdb->prefix . TAOBAOKE_CART_TABLE;
     $promote_table_name = $wpdb->prefix . TAOBAOKE_PROMOTE_TABLE;
+    $keywords_table_name = $wpdb->prefix . TAOBAOKE_AUTO_KEYWORDS;
+    $hot_keywords_table_name = $wpdb->prefix . TAOBAOKE_HOT_KEYWORDS;
 
     if ($v != TAOBAOKE_DB_V) {
         $sql = "CREATE TABLE " . $cart_table_name . " (
@@ -60,6 +64,30 @@ function taobaoke_install_db() {
         );";
 
         dbDelta($promote_sql);
+
+        $auto_keyword_sql = "CREATE TABLE " . $keywords_table_name . " (
+        id bigint(20) NOT NULL AUTO_INCREMENT,
+        user_id bigint(20) NOT NULL,
+        keyword varchar(500) character set utf8 collate utf8_unicode_ci NOT NULL,
+        click_url varchar(10000) character set utf8 collate utf8_unicode_ci NOT NULL,
+        add_time datetime NOT NULL default '0000-00-00 00:00:00',
+        update_time datetime NOT NULL default '0000-00-00 00:00:00',
+        PRIMARY KEY (id)
+        );";
+
+        dbDelta($auto_keyword_sql);
+
+        $hot_keyword_sql = "CREATE TABLE " . $hot_keywords_table_name . " (
+        id bigint(20) NOT NULL AUTO_INCREMENT,
+        user_id bigint(20) NOT NULL,
+        keyword varchar(500) character set utf8 collate utf8_unicode_ci NOT NULL,
+        click_url varchar(10000) character set utf8 collate utf8_unicode_ci NOT NULL,
+        add_time datetime NOT NULL default '0000-00-00 00:00:00',
+        update_time datetime NOT NULL default '0000-00-00 00:00:00',
+        PRIMARY KEY (id)
+        );";
+
+        dbDelta($hot_keyword_sql);
     }
 
     update_option('taobaoke_db_version', TAOBAOKE_DB_V);
@@ -84,5 +112,7 @@ function taobaoke_deactivate_plugin() {
 
         $role_object->remove_cap('use taobaoke');
     }
+
+    wp_clear_scheduled_hook('taobaoke_auto_sync');
 }
 ?>

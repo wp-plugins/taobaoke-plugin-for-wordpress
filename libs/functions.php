@@ -10,18 +10,22 @@ function taobaoke_cache_set($key, $value, $expires) {
 
 function pid_get() {
     global $current_user;
-    get_currentuserinfo();
+    //get_currentuserinfo();
 
     $var_key = PLUGIN_PREFIX . $current_user->ID . '-pid';
 
     $value = get_option($var_key, null);
+    if (null == $value) {
+        $var_key = PLUGIN_PREFIX . '1' . '-pid';
+        $value = get_option($var_key, TOP_PID);
+    }
 
     return stripslashes($value);
 }
 
 function pid_set($value) {
     global $current_user;
-    get_currentuserinfo();
+    //get_currentuserinfo();
 
     $var_key = PLUGIN_PREFIX . $current_user->ID . '-pid';
 
@@ -47,18 +51,23 @@ function appsecret_get() {
 
 function nickname_get() {
     global $current_user;
-    get_currentuserinfo();
+    //get_currentuserinfo();
 
     $var_key = PLUGIN_PREFIX . $current_user->ID . '-nickname';
 
     $value = get_option($var_key, null);
+
+    if (null == $value) {
+        $var_key = PLUGIN_PREFIX . '1' . '-nickname';
+        $value = get_option($var_key, TOP_NICK);
+    }
 
     return $value;
 }
 
 function nickname_set($value) {
     global $current_user;
-    get_currentuserinfo();
+    //get_currentuserinfo();
 
     $var_key = PLUGIN_PREFIX . $current_user->ID . '-nickname';
 
@@ -421,6 +430,86 @@ function taobaoke_show_color($item) {
     }
 
     return $color;
+}
+
+function sync_hot_keywords() {
+    $hot_keywords = get_hot_keywords();
+    if (isset($hot_keywords['totalCount']) && $hot_keywords['totalCount'] > 0) {
+        $keywords = $hot_keywords['hotkeywords'];
+
+        foreach ($keywords as $keyword) {
+            $keyword = trim($keyword);
+            $keyword_url = convert_keyword($keyword);
+            add_hot_keyword_to_db($keyword, $keyword_url);
+        }
+    } 
+}
+
+function get_hot_keyword_from_db($table_name) {
+    global $wpdb;
+
+    $table = $wpdb->prefix . $table_name;
+
+    $result = $wpdb->get_results("SELECT `keyword`, `click_url` FROM $table;");
+
+    $keywords = array();
+    foreach ($result as $cur) {
+        $keywords[$cur->keyword] = $cur->click_url;
+    }
+
+    return $keywords;
+}
+
+function add_keyword_to_db($keyword, $keyword_url, $table) {
+    global $wpdb;
+    global $current_user;
+
+    $user_id = isset($current_user) ? $current_user->ID : 1;
+
+    $table = $wpdb->prefix . $table;
+
+    $keyword_count = $wpdb->get_var("SELECT COUNT(*) AS count FROM $table WHERE `user_id` = $user_id AND `keyword` = '$keyword';");
+    if ($keyword_count > 0) {
+        $wpdb->query("UPDATE $table SET `click_url` = '$keyword_url' WHERE `user_id` = $user_id AND `keyword` = '$keyword';");
+    }
+    else {
+        $wpdb->query("INSERT INTO $table VALUES (NULL, $user_id, '$keyword', '$keyword_url', NOW(), NOW());");
+    }
+}
+
+function add_hot_keyword_to_db($keyword, $keyword_url) {
+    add_keyword_to_db($keyword, $keyword_url, TAOBAOKE_HOT_KEYWORDS);
+}
+
+function add_auto_keyword_to_db($keyword, $keyword_url) {
+   add_keyword_to_db($keyword, $keyword_url, TAOBAOKE_AUTO_KEYWORDS);
+}
+
+function convert_keyword($keyword) {
+    $keywords_in_db = get_hot_keyword_from_db(TAOBAOKE_AUTO_KEYWORDS);
+    if (array_key_exists($keyword, $keywords_in_db)) {
+        return $keywords_in_db[$keyword];
+    }
+
+    $keywords_in_db = get_hot_keyword_from_db(TAOBAOKE_HOT_KEYWORDS);
+    if (array_key_exists($keyword, $keywords_in_db)) {
+        return $keywords_in_db[$keyword];
+    }
+
+    $taobaoke_api = new TaobaokeApi();
+	$request = new TaobaokeGetSearchUrlRequest();
+	$request->setKeyword($keyword);
+	$request->setNick(var_get('nickname', 'wyattfang'));
+	$request->setOuterCode('blog');
+
+	$search_result = $taobaoke_api->getSearchUrl($request);
+	if (null != $search_result && array_key_exists('taobaoke_item', $search_result)) {
+        $search_url = $search_result['taobaoke_item']['keyword_click_url'];
+
+        return $search_url;
+    }
+
+    return '#'; //TODO ERROR HANDLING LOGIC CODE
 }
 
 function get_hot_keywords() {
