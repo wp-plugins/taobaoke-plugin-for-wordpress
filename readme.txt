@@ -4,7 +4,7 @@ Donate link:  http://tao.da-fang.com/
 Tags: taobaoke, 淘宝客, 广告, 推广, 阿里妈妈, 淘宝, Tao Bao Ke, Tao bao ke
 Requires at least: 2.8.2
 Tested up to: 3.0.1
-Stable tag: 2.3.0
+Stable tag: 2.3.1
 
 淘宝客的wordpress的插件，可以通过wordpress的后台添加淘宝客的商品到您的blog来赚钱。
 
@@ -100,7 +100,7 @@ function taobaoke_widget_sidebar()  {
 = 2.2.2 =
 * 升级API版本从1.0到2.0
 
-= 2.3.0 =
+= 2.3.1 =
 * 增加了更多的广告位，更多智能化的设置
 
 == Arbitrary section ==
