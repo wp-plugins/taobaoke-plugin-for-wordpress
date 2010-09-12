@@ -46,12 +46,18 @@ add_action('wp_head', 'taobaoke_gotall_analytics_vars');
 add_action('wp_footer', 'taobaoke_gotall_analytics');
 
 function taobaoke_add_random_ads($data) {
+    static $activities = null;
+    static $hot_keywords = null;
+
     $auto_activity = var_get('auto-activity-ad', 0);
     $auto_hot = var_get('auto-hot-products', 0);
     $pid = var_get('pid');
 
     if ($auto_activity) {
-        $activities = get_activities_from_db();
+        if (null == $activities) {
+            $activities = get_activities_from_db();
+        }
+
         if (isset($activities['totalCount']) && $activities['totalCount'] > 0) {
             $total = $activities['totalCount'];
             $rand_ad_index = array_rand($activities['promotions'], 1);
@@ -67,7 +73,10 @@ function taobaoke_add_random_ads($data) {
     }
 
     if ($auto_hot) {
-        $hot_keywords = get_hot_keyword_from_db(TAOBAOKE_HOT_KEYWORDS);
+        if (null == $hot_keywords) {
+            $hot_keywords = get_hot_keyword_from_db(TAOBAOKE_HOT_KEYWORDS);
+        }
+
         if (null != $hot_keywords && is_array($hot_keywords)) { 
 
             $rand_hots = count($hot_keywords) > 8 ? array_rand($hot_keywords, 8) : array_rand($hot_keywords, count($hot_keywords));
