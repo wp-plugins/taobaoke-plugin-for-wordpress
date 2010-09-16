@@ -4,12 +4,13 @@ Donate link:  http://tao.da-fang.com/
 Tags: taobaoke, 淘宝客, 广告, 推广, 阿里妈妈, 淘宝, Tao Bao Ke, Tao bao ke
 Requires at least: 2.8.2
 Tested up to: 3.0.1
-Stable tag: 2.3.1
+Stable tag: 2.3.2
 
-淘宝客的wordpress的插件，可以通过wordpress的后台添加淘宝客的商品到您的blog来赚钱。
+淘宝网官方推荐的淘宝客wordpress的插件，可以通过wordpress的后台添加淘宝客的商品到您的blog来赚钱。
 
 == Description ==
 
+<h1><a href="http://club.alimama.com/read-htm-tid-685825.html">祝贺该插件成为淘宝网官方推荐的插件。</a></h1>
 <h1><a href="http://tao.da-fang.com/"更多详细的介绍，请参见作者插件的页面。</a></h1>
 淘宝客的wordpress的插件，可以通过wordpress的后台添加淘宝客的商品到您的blog来赚钱，目前版本中可以在wordpress后台方便的浏览淘宝客的商品和分类列表，然后选择热门的商品推广到站点的sidebar或者博客页面中。更多功能还在陆续加入中。
 
@@ -102,6 +103,9 @@ function taobaoke_widget_sidebar()  {
 
 = 2.3.1 =
 * 增加了更多的广告位，更多智能化的设置
+
+= 2.3.2 =
+* 修复pid初始化时出问题的bug；修复关键词链接不正确的bug；
 
 == Arbitrary section ==
 
