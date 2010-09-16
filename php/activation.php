@@ -3,7 +3,6 @@ function taobaoke_activate_plugin() {
     var_set('appkey', APP_KEY);
     var_set('appsecret', APP_SECRET);
     var_set('url', TOP_URL);
-    var_set('pid', TOP_PID);
 
     $site_url = get_bloginfo('wpurl');
     $site_name = get_bloginfo('name');
@@ -19,7 +18,7 @@ function taobaoke_activate_plugin() {
         $role_object->add_cap('use taobaoke');
     }
 
-    wp_schedule_event(time(), 'daily', 'taobaoke_auto_sync');
+    wp_schedule_event(time(), 'hourly', 'taobaoke_auto_sync');
 }
 
 function taobaoke_install_db() {
@@ -94,11 +93,6 @@ function taobaoke_install_db() {
 }
 
 function taobaoke_deactivate_plugin() {
-    var_delete('appkey', APP_KEY);
-    var_delete('appsecret', APP_SECRET);
-    var_delete('url', TOP_URL);
-    var_delete('pid', TOP_PID);
-
     $site_url = get_bloginfo('wpurl');
     $site_name = get_bloginfo('name');
     $admin_email = 'mail@da-fang.com';

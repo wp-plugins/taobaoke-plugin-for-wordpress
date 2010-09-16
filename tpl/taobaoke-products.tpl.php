@@ -3,7 +3,32 @@
 <div class="metabox-holder">
   <div class="postbox-container" style="width:90%;">
     <div class="meta-box-sortables ui-sortablei" style="min-height:50px;">
-
+<!-- box begin -->
+        <div id="taobaoke-settings" class="postbox" style="display:block">
+          <div class="handlediv" title="显示/隐藏"><br /></div>
+          <h3 class="hndle"><span>高性能 高稳定 性价比高 - 插件作者使用的主机</span></h3>
+          <div class="inside">
+          <!--box content begin-->
+<script type='text/javascript' src='http://partner.googleadservices.com/gampad/google_service.js'>
+</script>
+<script type='text/javascript'>
+GS_googleAddAdSenseService("ca-pub-6365958691606954");
+GS_googleEnableAllServices();
+</script>
+<script type='text/javascript'>
+GA_googleAddSlot("ca-pub-6365958691606954", "taobaoke_setting_234_60");
+</script>
+<script type='text/javascript'>
+GA_googleFetchAds();
+</script>
+<!-- ca-pub-6365958691606954/taobaoke_setting_234_60 -->
+<script type='text/javascript'>
+GA_googleFillSlot("taobaoke_setting_234_60");
+</script>
+          <!-- box content end -->  
+          </div>
+        </div>
+      <!-- box end-->
       <!-- box begin -->
         <div id="taobaoke-settings" class="postbox">
           <div class="handlediv" title="显示/隐藏"><br /></div>

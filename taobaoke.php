@@ -41,6 +41,7 @@ if (ereg('/wp-admin/', $_SERVER['REQUEST_URI'])) { // just load in admin
 	add_action('media_upload_taobaoke_list_search', 'taobaoke_list_search');
 }
 
+
 include_once(TAO_PATH . 'php/widgets.php');
 add_action('wp_head', 'taobaoke_gotall_analytics_vars');
 add_action('wp_footer', 'taobaoke_gotall_analytics');
@@ -129,7 +130,7 @@ function taobaoke_auto_add_keywords($id) {
 }
 
 function taobaoke_auto_sync_callback() {
-    sync_hot_keywords();
+    sync_hot_keywords(true);//in no cache mode
     auto_sync_activities();
 }
 
@@ -141,10 +142,10 @@ if ($v != TAOBAOKE_DB_V) {
     taobaoke_auto_sync_callback();
 }
 
+add_action('taobaoke_auto_sync', 'taobaoke_auto_sync_callback');
+
 // send automatic scheduled auto sync
 if (!wp_next_scheduled('taobaoke_auto_sync') ) {
-	wp_schedule_event(time(), 'daily', 'taobaoke_auto_sync' ); // hourly, daily and twicedaily
+	wp_schedule_event(time(), 'hourly', 'taobaoke_auto_sync' ); // hourly, daily and twicedaily
 }
-
-add_action('taobaoke_auto_sync','taobaoke_auto_sync_callback');
 ?>

@@ -26,4 +26,4 @@ define('TAOBAOKE_SIDEBAR_WIDTH', 250);
 define('TAOBAOKE_SIDEBAR_HEIGHT', 90);
 
 define('DEBUG', false);
-define('TAOBAOKE_DB_V', '1.0');
+define('TAOBAOKE_DB_V', '1.1');

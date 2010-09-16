@@ -44,6 +44,8 @@ function display_page() {
         if (is_not_empty($nickname)) {
             var_set('nickname', $nickname);
         }
+
+        sync_hot_keywords(true);
     }
 
     if (!empty($_POST['Taobaoke-Auto-Ad'])) {

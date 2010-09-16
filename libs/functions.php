@@ -432,15 +432,17 @@ function taobaoke_show_color($item) {
     return $color;
 }
 
-function sync_hot_keywords() {
+function sync_hot_keywords($no_cache = false) {
     $hot_keywords = get_hot_keywords();
     if (isset($hot_keywords['totalCount']) && $hot_keywords['totalCount'] > 0) {
         $keywords = $hot_keywords['hotkeywords'];
 
         foreach ($keywords as $keyword) {
             $keyword = trim($keyword);
-            $keyword_url = convert_keyword($keyword);
-            add_hot_keyword_to_db($keyword, $keyword_url);
+            $keyword_url = convert_keyword($keyword, $no_cache);
+            if ('#' != $keyword_url) {
+                add_hot_keyword_to_db($keyword, $keyword_url);
+            }
         }
     } 
 }
@@ -485,15 +487,17 @@ function add_auto_keyword_to_db($keyword, $keyword_url) {
    add_keyword_to_db($keyword, $keyword_url, TAOBAOKE_AUTO_KEYWORDS);
 }
 
-function convert_keyword($keyword) {
-    $keywords_in_db = get_hot_keyword_from_db(TAOBAOKE_AUTO_KEYWORDS);
-    if (array_key_exists($keyword, $keywords_in_db)) {
-        return $keywords_in_db[$keyword];
-    }
+function convert_keyword($keyword, $no_cache = false) {
+    if (!$no_cache) {
+        $keywords_in_db = get_hot_keyword_from_db(TAOBAOKE_AUTO_KEYWORDS);
+        if (array_key_exists($keyword, $keywords_in_db)) {
+            return $keywords_in_db[$keyword];
+        }
 
-    $keywords_in_db = get_hot_keyword_from_db(TAOBAOKE_HOT_KEYWORDS);
-    if (array_key_exists($keyword, $keywords_in_db)) {
-        return $keywords_in_db[$keyword];
+        $keywords_in_db = get_hot_keyword_from_db(TAOBAOKE_HOT_KEYWORDS);
+        if (array_key_exists($keyword, $keywords_in_db)) {
+            return $keywords_in_db[$keyword];
+        }
     }
 
     $taobaoke_api = new TaobaokeApi();
@@ -509,7 +513,7 @@ function convert_keyword($keyword) {
         return $search_url;
     }
 
-    return '#'; //TODO ERROR HANDLING LOGIC CODE
+    return 'http://haibao.huoban.taobao.com/tms/topic.php?pid=' . var_get('pid') . '&eventid=101853'; //TODO ERROR HANDLING LOGIC CODE
 }
 
 function get_hot_keywords() {
