@@ -3,7 +3,7 @@
 Plugin Name: Taobaoke Plugin For Wordpress
 Plugin URI: http://tao.da-fang.com/
 Description: 淘宝客的wordpress的插件，可以通过wordpress的后台添加淘宝客的商品或者店铺到您的blog来赚钱。Bug请提交到http://tao.da-fang.com
-Version: 2.3.1
+Version: 2.3.2
 Author: Wyatt Fang
 Author URI: http://blog.da-fang.com/
 */
